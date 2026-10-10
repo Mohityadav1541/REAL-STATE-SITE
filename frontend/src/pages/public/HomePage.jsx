@@ -30,18 +30,10 @@ function HeroSection() {
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(3rem, 8vw, 6rem)', fontWeight: 500, color: '#fff', letterSpacing: '-0.03em', lineHeight: 1.1, marginBottom: '8px' }}
+          style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(3rem, 8vw, 6rem)', fontWeight: 500, color: '#fff', letterSpacing: '-0.03em', lineHeight: 1.1, marginBottom: '24px' }}
         >
           Find Your Foundation
         </motion.h1>
-        <motion.h2
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
-          style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', color: 'rgba(255,255,255,0.9)', letterSpacing: '0.05em', marginBottom: '24px', fontWeight: 400 }}
-        >
-          SS DEVELOPERS
-        </motion.h2>
         <motion.p 
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -59,6 +51,35 @@ function HeroSection() {
             Find Properties <ArrowRight size={16} />
           </Link>
         </motion.div>
+      </motion.div>
+
+      <motion.div 
+        className="desktop-only"
+        style={{ 
+          position: 'absolute', 
+          bottom: '-2vh', 
+          left: 0, 
+          width: '100%', 
+          textAlign: 'center',
+          pointerEvents: 'none',
+          scale: useTransform(scrollY, [0, 500], [1, 5]),
+          opacity: useTransform(scrollY, [0, 400], [0.8, 0]),
+          zIndex: 5
+        }}
+      >
+        <h2 style={{
+          fontFamily: 'var(--font-heading)',
+          fontSize: '12vw',
+          fontWeight: 700,
+          color: 'rgba(255, 255, 255, 0.9)',
+          whiteSpace: 'nowrap',
+          margin: 0,
+          lineHeight: 1,
+          letterSpacing: '-0.02em',
+          textShadow: '0 10px 30px rgba(0,0,0,0.5)'
+        }}>
+          SS DEVELOPERS
+        </h2>
       </motion.div>
     </section>
   );
