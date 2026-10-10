@@ -1,0 +1,126 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Admin {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Project {
+  id           String         @id @default(uuid())
+  name         String
+  slug         String         @unique
+  tagline      String?
+  description  String?
+  location     String
+  address      String?
+  lat          Float?
+  lng          Float?
+  highlights   String?
+  connectivity String?
+  infrastructure String?
+  amenities    String?
+  isActive     Boolean        @default(true)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  plots        Plot[]
+  images       ProjectImage[]
+  leads        Lead[]
+  siteVisits   SiteVisit[]
+}
+
+model ProjectImage {
+  id        String           @id @default(uuid())
+  projectId String
+  url       String
+  publicId  String?
+  type      String           @default("GALLERY")
+  order     Int              @default(0)
+  altText   String?
+  createdAt DateTime         @default(now())
+
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model Plot {
+  id         String     @id @default(uuid())
+  projectId  String
+  plotNumber String
+  area       Float?
+  areaUnit   String?    @default("sqft")
+  price      Float?
+  priceUnit  String?    @default("total")
+  facing     String?
+  roadWidth  String?
+  status     String     @default("AVAILABLE")
+  notes      String?
+  isActive   Boolean    @default(true)
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+
+  project    Project     @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  leads      Lead[]
+  siteVisits SiteVisit[]
+
+  @@unique([projectId, plotNumber])
+}
+
+model Customer {
+  id         String      @id @default(uuid())
+  name       String
+  mobile     String
+  email      String?
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+
+  leads      Lead[]
+  siteVisits SiteVisit[]
+}
+
+model Lead {
+  id         String     @id @default(uuid())
+  customerId String
+  projectId  String?
+  plotId     String?
+  source     String     @default("WEBSITE")
+  message    String?
+  status     String     @default("NEW")
+  notes      String?
+  followUpAt DateTime?
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+
+  customer   Customer  @relation(fields: [customerId], references: [id])
+  project    Project?  @relation(fields: [projectId], references: [id])
+  plot       Plot?     @relation(fields: [plotId], references: [id])
+}
+
+model SiteVisit {
+  id            String          @id @default(uuid())
+  customerId    String
+  projectId     String?
+  plotId        String?
+  preferredDate String?
+  preferredTime String?
+  message       String?
+  status        String          @default("REQUESTED")
+  adminNotes    String?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  customer   Customer @relation(fields: [customerId], references: [id])
+  project    Project? @relation(fields: [projectId], references: [id])
+  plot       Plot?    @relation(fields: [plotId], references: [id])
+}
