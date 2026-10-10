@@ -24,19 +24,19 @@ function HeroSection() {
         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 100%)' }} />
       </motion.div>
       
-      {/* Premium Parallax Background Text */}
+      {/* Premium Parallax Background Text at Bottom */}
       <motion.div 
         className="desktop-only"
         style={{ 
           position: 'absolute', 
-          top: '50%', 
+          bottom: '-5vh', // Sticky at the bottom
           left: '50%', 
-          transform: 'translate(-50%, -50%)', 
+          transform: 'translateX(-50%)', 
           width: '100%', 
           textAlign: 'center',
           pointerEvents: 'none',
           zIndex: 5,
-          y: useTransform(scrollY, [0, 1000], [0, 400]) // Parallax effect
+          y: useTransform(scrollY, [0, 1000], [0, 200]) // Slower parallax effect
         }}
       >
         <h2 style={{
