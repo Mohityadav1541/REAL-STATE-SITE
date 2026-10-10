@@ -59,16 +59,37 @@ function HeroSection() {
 /* =========================================================
    2. TRANSITION ZOOM TEXT
    ========================================================= */
+function ScatterChar({ char, index, scatterProgress }) {
+  const getX = (i) => [ -800, -400, 600, -200, 1000, -600, 400, 800, -1000, 200, 700, -500, 900 ][i % 13];
+  const getY = (i) => [ -600, 800, -400, 1000, -200, 600, -800, 400, 300, -700, 900, -500, 200 ][i % 13];
+  const getRotate = (i) => [ -45, 90, -120, 60, -30, 180, -90, 45, 120, -60, 30, -180, 15 ][i % 13];
+
+  const x = useTransform(scatterProgress, [0, 1], [0, getX(index)]);
+  const y = useTransform(scatterProgress, [0, 1], [0, getY(index)]);
+  const rotate = useTransform(scatterProgress, [0, 1], [0, getRotate(index)]);
+
+  return (
+    <motion.span style={{
+      display: 'inline-block',
+      whiteSpace: 'pre',
+      x, y, rotate
+    }}>
+      {char}
+    </motion.span>
+  );
+}
+
 function ZoomTransition() {
-  const { scrollYProgress } = useScroll({
-    offset: ["start start", "end start"]
-  });
+  const { scrollY } = useScroll();
   
-  // As user scrolls down past the hero, the text grows from 1 to massive, fading out
-  const scale = useTransform(scrollYProgress, [0, 0.2], [1, 20]);
-  // Start invisible (0), fade in at 0.05, start fading out at 0.15, gone at 0.2
-  const opacity = useTransform(scrollYProgress, [0, 0.05, 0.15, 0.2], [0, 1, 1, 0]);
-  const display = useTransform(scrollYProgress, (v) => v > 0.25 ? 'none' : 'flex');
+  // Guaranteed to vanish fully by 550px of scrolling (before Hero ends)
+  const opacity = useTransform(scrollY, [50, 150, 350, 550], [0, 1, 1, 0]);
+  const scale = useTransform(scrollY, [150, 550], [1, 4]);
+  const scatterProgress = useTransform(scrollY, [250, 550], [0, 1]);
+  const display = useTransform(scrollY, (v) => v > 600 ? 'none' : 'flex');
+  const filter = useTransform(scrollY, [350, 550], ['blur(0px)', 'blur(12px)']);
+
+  const text = "SS DEVELOPERS";
 
   return (
     <motion.div className="desktop-only" style={{
@@ -80,19 +101,21 @@ function ZoomTransition() {
       pointerEvents: 'none',
       zIndex: 5
     }}>
-      <motion.h2 style={{
+      <motion.div style={{
         fontFamily: 'var(--font-heading)',
         fontSize: '8vw',
         fontWeight: 700,
         color: '#fff',
+        textShadow: '0 4px 24px rgba(0,0,0,0.2)',
+        textAlign: 'center',
         scale,
         opacity,
-        textAlign: 'center',
-        whiteSpace: 'nowrap',
-        textShadow: '0 4px 24px rgba(0,0,0,0.2)'
+        filter
       }}>
-        SS DEVELOPERS
-      </motion.h2>
+        {text.split('').map((char, i) => (
+          <ScatterChar key={i} char={char} index={i} scatterProgress={scatterProgress} />
+        ))}
+      </motion.div>
     </motion.div>
   );
 }
