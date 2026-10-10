@@ -29,11 +29,10 @@ function HeroSection() {
         className="desktop-only"
         style={{ 
           position: 'absolute', 
-          bottom: '-5vh', // Sticky at the bottom
-          left: '50%', 
-          transform: 'translateX(-50%)', 
+          bottom: '-2vh', // Sticky at the bottom
+          left: '20px', // Pull to the left
           width: '100%', 
-          textAlign: 'center',
+          textAlign: 'left', // Align to left
           pointerEvents: 'none',
           zIndex: 5,
           y: useTransform(scrollY, [0, 1000], [0, 200]) // Slower parallax effect
@@ -41,7 +40,7 @@ function HeroSection() {
       >
         <h2 style={{
           fontFamily: 'var(--font-heading)',
-          fontSize: '18vw',
+          fontSize: '12vw', // Reduced from 18vw so it fits
           fontWeight: 800,
           color: 'transparent',
           WebkitTextStroke: '2px rgba(255, 255, 255, 0.15)',
