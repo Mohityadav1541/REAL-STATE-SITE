@@ -281,7 +281,7 @@ function HowWeHelpSection() {
 function SupportSection() {
   const cards = [
     { title: 'Legal & Compliance', img: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=2070', desc: 'Navigate complex industrial regulations with ease.' },
-    { title: 'Infrastructure Setup', img: 'https://images.unsplash.com/photo-1541888086925-0c1bb678b668?q=80&w=2070', desc: 'Power, water, and connectivity solutions.' },
+    { title: 'Infrastructure Setup', img: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=2070', desc: 'Power, water, and connectivity solutions.' },
     { title: 'Construction & Development', img: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2071', desc: 'End-to-end building and architecture support.' },
   ];
 
