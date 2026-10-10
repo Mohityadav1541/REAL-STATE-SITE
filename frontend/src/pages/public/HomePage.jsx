@@ -14,6 +14,7 @@ function HeroSection() {
 
   return (
     <section style={{ position: 'relative', height: '100vh', overflow: 'hidden', backgroundColor: 'var(--color-bg)' }}>
+      {/* Background Image */}
       <motion.div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', y: y1 }}>
         <motion.img 
           src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070" 
@@ -23,6 +24,37 @@ function HeroSection() {
         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 100%)' }} />
       </motion.div>
       
+      {/* Premium Parallax Background Text */}
+      <motion.div 
+        className="desktop-only"
+        style={{ 
+          position: 'absolute', 
+          top: '50%', 
+          left: '50%', 
+          transform: 'translate(-50%, -50%)', 
+          width: '100%', 
+          textAlign: 'center',
+          pointerEvents: 'none',
+          zIndex: 5,
+          y: useTransform(scrollY, [0, 1000], [0, 400]) // Parallax effect
+        }}
+      >
+        <h2 style={{
+          fontFamily: 'var(--font-heading)',
+          fontSize: '18vw',
+          fontWeight: 800,
+          color: 'transparent',
+          WebkitTextStroke: '2px rgba(255, 255, 255, 0.15)',
+          whiteSpace: 'nowrap',
+          margin: 0,
+          lineHeight: 1,
+          letterSpacing: '0.02em',
+        }}>
+          SS DEVELOPERS
+        </h2>
+      </motion.div>
+
+      {/* Main Content */}
       <motion.div 
         style={{ position: 'relative', zIndex: 10, height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', padding: '0 20px', opacity }}
       >
@@ -51,35 +83,6 @@ function HeroSection() {
             Find Properties <ArrowRight size={16} />
           </Link>
         </motion.div>
-      </motion.div>
-
-      <motion.div 
-        className="desktop-only"
-        style={{ 
-          position: 'absolute', 
-          bottom: '-2vh', 
-          left: 0, 
-          width: '100%', 
-          textAlign: 'center',
-          pointerEvents: 'none',
-          scale: useTransform(scrollY, [0, 500], [1, 5]),
-          opacity: useTransform(scrollY, [0, 400], [0.8, 0]),
-          zIndex: 5
-        }}
-      >
-        <h2 style={{
-          fontFamily: 'var(--font-heading)',
-          fontSize: '12vw',
-          fontWeight: 700,
-          color: 'rgba(255, 255, 255, 0.9)',
-          whiteSpace: 'nowrap',
-          margin: 0,
-          lineHeight: 1,
-          letterSpacing: '-0.02em',
-          textShadow: '0 10px 30px rgba(0,0,0,0.5)'
-        }}>
-          SS DEVELOPERS
-        </h2>
       </motion.div>
     </section>
   );
