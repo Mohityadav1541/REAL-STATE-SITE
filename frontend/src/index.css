@@ -129,12 +129,8 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
-html, body {
-  overflow-x: hidden;
-  overscroll-behavior: none;
-}
-
 body {
+  overflow-x: hidden;
   font-family: var(--font-sans);
   font-size: var(--text-base);
   color: var(--color-text-primary);
