@@ -5,7 +5,7 @@ import Chatbot from '../components/Chatbot';
 
 export default function PublicLayout() {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: 'var(--color-bg)' }}>
       <Navbar />
       <main style={{ flex: 1 }}>
         <Outlet />
