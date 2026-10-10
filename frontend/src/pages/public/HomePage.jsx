@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import ParticleText from '../../components/ParticleText';
 
 /* =========================================================
    1. HERO SECTION
@@ -24,34 +25,10 @@ function HeroSection() {
         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 100%)' }} />
       </motion.div>
       
-      {/* Premium Parallax Background Text at Bottom */}
-      <motion.div 
-        className="desktop-only"
-        style={{ 
-          position: 'absolute', 
-          bottom: '-2vh', // Sticky at the bottom
-          left: '20px', // Pull to the left
-          width: '100%', 
-          textAlign: 'left', // Align to left
-          pointerEvents: 'none',
-          zIndex: 5,
-          y: useTransform(scrollY, [0, 1000], [0, 200]) // Slower parallax effect
-        }}
-      >
-        <h2 style={{
-          fontFamily: 'var(--font-heading)',
-          fontSize: '12vw', // Reduced from 18vw so it fits
-          fontWeight: 800,
-          color: 'transparent',
-          WebkitTextStroke: '2px rgba(255, 255, 255, 0.15)',
-          whiteSpace: 'nowrap',
-          margin: 0,
-          lineHeight: 1,
-          letterSpacing: '0.02em',
-        }}>
-          SS DEVELOPERS
-        </h2>
-      </motion.div>
+      {/* Premium Parallax Background Text at Bottom - Replaced with ParticleText */}
+      <div className="desktop-only">
+        <ParticleText text="SS DEVELOPERS" />
+      </div>
 
       {/* Main Content */}
       <motion.div 
