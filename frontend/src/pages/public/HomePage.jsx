@@ -66,11 +66,12 @@ function ZoomTransition() {
   
   // As user scrolls down past the hero, the text grows from 1 to massive, fading out
   const scale = useTransform(scrollYProgress, [0, 0.2], [1, 20]);
-  const opacity = useTransform(scrollYProgress, [0.1, 0.2], [1, 0]);
+  // Start invisible (0), fade in at 0.05, start fading out at 0.15, gone at 0.2
+  const opacity = useTransform(scrollYProgress, [0, 0.05, 0.15, 0.2], [0, 1, 1, 0]);
   const display = useTransform(scrollYProgress, (v) => v > 0.25 ? 'none' : 'flex');
 
   return (
-    <motion.div style={{
+    <motion.div className="desktop-only" style={{
       position: 'fixed',
       top: 0, left: 0, width: '100%', height: '100vh',
       display,
@@ -391,6 +392,7 @@ export default function HomePage() {
 
   return (
     <div style={{ backgroundColor: 'var(--color-bg)' }}>
+      <ZoomTransition />
       <HeroSection />
       <AerialSection />
       <RewiredSection />
