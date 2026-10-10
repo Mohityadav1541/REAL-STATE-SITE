@@ -22,6 +22,7 @@ app.use(
     origin: [
       process.env.FRONTEND_URL || 'http://localhost:5173',
       /^http:\/\/localhost:\d+$/,
+      /^https:\/\/.*\.vercel\.app$/,
     ],
     credentials: true,
   })
