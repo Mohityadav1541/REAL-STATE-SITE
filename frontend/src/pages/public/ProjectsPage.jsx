@@ -35,7 +35,7 @@ export default function ProjectsPage() {
           {isLoading ? (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-8)' }}>
               {[1, 2].map((i) => (
-                <div key={i} className="card" style={{ display: 'grid', gridTemplateColumns: '400px 1fr', minHeight: 280 }}>
+                <div key={i} className="card pl-card" style={{ minHeight: 280 }}>
                   <div className="skeleton" style={{ height: '100%', minHeight: 280, borderRadius: 'var(--radius-xl) 0 0 var(--radius-xl)' }} />
                   <div style={{ padding: 'var(--space-8)' }}>
                     <div className="skeleton" style={{ height: 32, width: '60%', marginBottom: 12 }} />

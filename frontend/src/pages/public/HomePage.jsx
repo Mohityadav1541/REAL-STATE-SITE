@@ -101,7 +101,7 @@ function ZoomTransition() {
    ========================================================= */
 function AerialSection() {
   return (
-    <section style={{ padding: '120px 0', background: 'var(--color-bg)' }}>
+    <section className="section" style={{ background: 'var(--color-bg)' }}>
       <div className="container">
         <motion.div 
           initial={{ opacity: 0, y: 40 }}
@@ -127,9 +127,9 @@ function AerialSection() {
    ========================================================= */
 function RewiredSection() {
   return (
-    <section id="why-us" style={{ padding: '120px 0', background: 'var(--color-bg)' }}>
+    <section id="why-us" className="section" style={{ background: 'var(--color-bg)' }}>
       <div className="container">
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '80px' }}>
+        <div className="grid grid-2">
           
           <motion.div
             initial={{ opacity: 0, x: -40 }}
@@ -183,14 +183,14 @@ function RewiredSection() {
    ========================================================= */
 function TeamSection() {
   return (
-    <section id="about" style={{ padding: '0 0 120px', background: 'var(--color-bg)' }}>
+    <section id="about" className="section" style={{ paddingTop: 0, background: 'var(--color-bg)' }}>
       <div className="container">
         <motion.div 
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '80px', alignItems: 'center' }}
+          className="grid grid-2" style={{ alignItems: 'center' }}
         >
           <div style={{ borderRadius: 'var(--radius-2xl)', overflow: 'hidden', height: '600px' }}>
             <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=2070" alt="Team" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -223,9 +223,9 @@ function HowWeHelpSection() {
   ];
 
   return (
-    <section id="investment" style={{ padding: '120px 0', background: 'var(--color-black)', color: '#fff' }}>
+    <section id="investment" className="section" style={{ background: 'var(--color-black)', color: '#fff' }}>
       <div className="container">
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '80px' }}>
+        <div className="grid grid-2">
           <div>
             <p style={{ fontSize: '14px', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'rgba(255,255,255,0.5)', marginBottom: '24px' }}>Services</p>
             <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(3rem, 5vw, 5rem)', fontWeight: 500, lineHeight: 1.1, letterSpacing: '-0.02em' }}>
@@ -286,7 +286,7 @@ function SupportSection() {
   ];
 
   return (
-    <section style={{ padding: '120px 0', background: 'var(--color-black)', color: '#fff' }}>
+    <section className="section" style={{ background: 'var(--color-black)', color: '#fff' }}>
       <div className="container">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -301,7 +301,7 @@ function SupportSection() {
           </p>
         </motion.div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
+        <div className="grid grid-3">
           {cards.map((card, i) => (
             <motion.div
               key={i}
@@ -343,7 +343,7 @@ function SupportSection() {
    ========================================================= */
 function NewsletterSection() {
   return (
-    <section style={{ padding: '80px 0', background: 'var(--color-black)', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+    <section className="section" style={{ background: 'var(--color-black)', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
       <div className="container">
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.5rem', fontWeight: 500 }}>
