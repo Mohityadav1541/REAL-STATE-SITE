@@ -30,10 +30,18 @@ function HeroSection() {
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(3rem, 8vw, 6rem)', fontWeight: 500, color: '#fff', letterSpacing: '-0.03em', lineHeight: 1.1, marginBottom: '24px' }}
+          style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(3rem, 8vw, 6rem)', fontWeight: 500, color: '#fff', letterSpacing: '-0.03em', lineHeight: 1.1, marginBottom: '8px' }}
         >
           Find Your Foundation
         </motion.h1>
+        <motion.h2
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+          style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', color: 'rgba(255,255,255,0.9)', letterSpacing: '0.05em', marginBottom: '24px', fontWeight: 400 }}
+        >
+          SS DEVELOPERS
+        </motion.h2>
         <motion.p 
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -53,70 +61,6 @@ function HeroSection() {
         </motion.div>
       </motion.div>
     </section>
-  );
-}
-
-/* =========================================================
-   2. TRANSITION ZOOM TEXT
-   ========================================================= */
-function ScatterChar({ char, index, scatterProgress }) {
-  const getX = (i) => [ -800, -400, 600, -200, 1000, -600, 400, 800, -1000, 200, 700, -500, 900 ][i % 13];
-  const getY = (i) => [ -600, 800, -400, 1000, -200, 600, -800, 400, 300, -700, 900, -500, 200 ][i % 13];
-  const getRotate = (i) => [ -45, 90, -120, 60, -30, 180, -90, 45, 120, -60, 30, -180, 15 ][i % 13];
-
-  const x = useTransform(scatterProgress, [0, 1], [0, getX(index)]);
-  const y = useTransform(scatterProgress, [0, 1], [0, getY(index)]);
-  const rotate = useTransform(scatterProgress, [0, 1], [0, getRotate(index)]);
-
-  return (
-    <motion.span style={{
-      display: 'inline-block',
-      whiteSpace: 'pre',
-      x, y, rotate
-    }}>
-      {char}
-    </motion.span>
-  );
-}
-
-function ZoomTransition() {
-  const { scrollY } = useScroll();
-  
-  // Guaranteed to vanish fully by 550px of scrolling (before Hero ends)
-  const opacity = useTransform(scrollY, [50, 150, 350, 550], [0, 1, 1, 0]);
-  const scale = useTransform(scrollY, [150, 550], [1, 4]);
-  const scatterProgress = useTransform(scrollY, [250, 550], [0, 1]);
-  const display = useTransform(scrollY, (v) => v > 600 ? 'none' : 'flex');
-  const filter = useTransform(scrollY, [350, 550], ['blur(0px)', 'blur(12px)']);
-
-  const text = "SS DEVELOPERS";
-
-  return (
-    <motion.div className="desktop-only" style={{
-      position: 'fixed',
-      top: 0, left: 0, width: '100%', height: '100vh',
-      display,
-      justifyContent: 'center',
-      alignItems: 'center',
-      pointerEvents: 'none',
-      zIndex: 5
-    }}>
-      <motion.div style={{
-        fontFamily: 'var(--font-heading)',
-        fontSize: '8vw',
-        fontWeight: 700,
-        color: '#fff',
-        textShadow: '0 4px 24px rgba(0,0,0,0.2)',
-        textAlign: 'center',
-        scale,
-        opacity,
-        filter
-      }}>
-        {text.split('').map((char, i) => (
-          <ScatterChar key={i} char={char} index={i} scatterProgress={scatterProgress} />
-        ))}
-      </motion.div>
-    </motion.div>
   );
 }
 
@@ -415,7 +359,6 @@ export default function HomePage() {
 
   return (
     <div style={{ backgroundColor: 'var(--color-bg)' }}>
-      <ZoomTransition />
       <HeroSection />
       <AerialSection />
       <RewiredSection />
