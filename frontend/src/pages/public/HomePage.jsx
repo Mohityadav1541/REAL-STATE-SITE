@@ -391,7 +391,6 @@ export default function HomePage() {
 
   return (
     <div style={{ backgroundColor: 'var(--color-bg)' }}>
-      <ZoomTransition />
       <HeroSection />
       <AerialSection />
       <RewiredSection />
