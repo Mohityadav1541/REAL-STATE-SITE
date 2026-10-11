@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
@@ -61,41 +61,179 @@ function HeroSection() {
 }
 
 /* =========================================================
-   2. TRANSITION ZOOM TEXT
+   2. TRANSITION ZOOM TEXT WITH ATOM DISINTEGRATION
    ========================================================= */
 function ZoomTransition() {
-  const { scrollYProgress } = useScroll({
-    offset: ["start start", "end start"]
+  const canvasRef = useRef(null);
+  const { scrollY } = useScroll();
+  const [dimensions, setDimensions] = useState({
+    width: typeof window !== 'undefined' ? window.innerWidth : 1200,
+    height: typeof window !== 'undefined' ? window.innerHeight : 800,
   });
-  
-  // As user scrolls down past the hero, the text grows from 1 to massive, fading out
-  const scale = useTransform(scrollYProgress, [0, 0.2], [1, 20]);
-  const opacity = useTransform(scrollYProgress, [0.1, 0.2], [1, 0]);
-  const display = useTransform(scrollYProgress, (v) => v > 0.25 ? 'none' : 'flex');
+
+  // Smooth zoom scale as user begins scrolling (from dab3b04)
+  const zoomScale = useTransform(scrollY, [0, 200], [1, 1.45]);
+  // Hide completely before colliding with the second image section
+  const display = useTransform(scrollY, (v) => (v > 520 ? 'none' : 'block'));
+
+  useEffect(() => {
+    const handleResize = () => {
+      setDimensions({ width: window.innerWidth, height: window.innerHeight });
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (dimensions.width === 0) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const width = dimensions.width;
+    const height = dimensions.height;
+    canvas.width = width;
+    canvas.height = height;
+
+    const text = 'SS DEVELOPERS';
+    const fontSize = Math.max(36, Math.min(width * 0.08, 110));
+
+    let particles = [];
+
+    const initParticles = () => {
+      particles = [];
+      const offscreen = document.createElement('canvas');
+      offscreen.width = width;
+      offscreen.height = height;
+      const offCtx = offscreen.getContext('2d', { willReadFrequently: true });
+      if (!offCtx) return;
+
+      offCtx.font = `700 ${fontSize}px "Outfit", sans-serif`;
+      offCtx.textAlign = 'center';
+      offCtx.textBaseline = 'middle';
+      offCtx.fillStyle = '#ffffff';
+
+      const centerX = width / 2;
+      const centerY = height / 2;
+      offCtx.fillText(text, centerX, centerY);
+
+      const imgData = offCtx.getImageData(0, 0, width, height);
+      const data = imgData.data;
+
+      const step = 3;
+
+      for (let y = 0; y < height; y += step) {
+        for (let x = 0; x < width; x += step) {
+          const idx = (y * width + x) * 4;
+          const alpha = data[idx + 3];
+          if (alpha > 90) {
+            particles.push({
+              baseX: x,
+              baseY: y,
+              radius: 1.0 + Math.random() * 1.5,
+              fallSpeed: 420 + Math.random() * 580,
+              scatterX: (Math.random() - 0.5) * 120,
+              delay: Math.random() * 0.3,
+              jitterPhase: Math.random() * Math.PI * 2,
+            });
+          }
+        }
+      }
+    };
+
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(initParticles);
+    } else {
+      initParticles();
+    }
+
+    let animationFrameId;
+    let time = 0;
+
+    const render = () => {
+      ctx.clearRect(0, 0, width, height);
+      time += 0.05;
+
+      const currentScroll = scrollY.get();
+
+      // Starts breaking into atoms at 120px scroll, fully fallen down and gone by 480px scroll
+      const breakStart = 120;
+      const breakEnd = 480;
+
+      let pProgress = 0;
+      if (currentScroll > breakStart) {
+        pProgress = Math.min(1, (currentScroll - breakStart) / (breakEnd - breakStart));
+      }
+
+      if (pProgress === 0) {
+        // Crisp solid text with exact styling from dab3b04
+        ctx.save();
+        ctx.font = `700 ${fontSize}px "Outfit", sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.shadowColor = 'rgba(0,0,0,0.2)';
+        ctx.shadowBlur = 24;
+        ctx.shadowOffsetY = 4;
+        ctx.fillStyle = '#ffffff';
+        ctx.fillText(text, width / 2, height / 2);
+        ctx.restore();
+      } else {
+        // Disintegrate into atom particles falling downside
+        const total = particles.length;
+        for (let i = 0; i < total; i++) {
+          const pt = particles[i];
+          const localP = Math.max(0, Math.min(1, (pProgress - pt.delay) / (1 - pt.delay + 0.0001)));
+          const ease = localP * localP * (3 - 2 * localP);
+
+          // Atomic thermal jitter
+          const jitter = Math.sin(localP * Math.PI) * 8;
+          const jX = Math.cos(time * 3 + pt.jitterPhase) * jitter;
+          const jY = Math.sin(time * 3 + pt.jitterPhase) * jitter;
+
+          const curX = pt.baseX + pt.scatterX * ease + jX;
+          const curY = pt.baseY + pt.fallSpeed * (ease * 1.3) + jY;
+
+          const opacity = Math.max(0, 1 - localP * 1.15);
+          if (opacity <= 0.01) continue;
+
+          ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+          ctx.beginPath();
+          ctx.arc(curX, curY, pt.radius, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      animationFrameId = requestAnimationFrame(render);
+    };
+
+    render();
+
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [dimensions, scrollY]);
 
   return (
-    <motion.div style={{
-      position: 'fixed',
-      top: 0, left: 0, width: '100%', height: '100vh',
-      display,
-      justifyContent: 'center',
-      alignItems: 'center',
-      pointerEvents: 'none',
-      zIndex: 5
-    }}>
-      <motion.h2 style={{
-        fontFamily: 'var(--font-heading)',
-        fontSize: '8vw',
-        fontWeight: 700,
-        color: '#fff',
-        scale,
-        opacity,
-        textAlign: 'center',
-        whiteSpace: 'nowrap',
-        textShadow: '0 4px 24px rgba(0,0,0,0.2)'
-      }}>
-        SS DEVELOPERS
-      </motion.h2>
+    <motion.div
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100vh',
+        display,
+        pointerEvents: 'none',
+        zIndex: 5,
+        scale: zoomScale,
+      }}
+    >
+      <canvas
+        ref={canvasRef}
+        style={{
+          width: '100%',
+          height: '100%',
+          display: 'block',
+        }}
+      />
     </motion.div>
   );
 }
