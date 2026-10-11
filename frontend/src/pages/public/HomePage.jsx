@@ -11,8 +11,6 @@ function HeroSection() {
   const y1 = useTransform(scrollY, [0, 1000], [0, 200]);
   const scale = useTransform(scrollY, [0, 1000], [1, 1.2]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
-  const outlineY = useTransform(scrollY, [0, 800], [0, 120]);
-  const outlineOpacity = useTransform(scrollY, [0, 450], [0.85, 0]);
 
   return (
     <section style={{ position: 'relative', height: '100vh', overflow: 'hidden', backgroundColor: 'var(--color-bg)' }}>
@@ -26,39 +24,7 @@ function HeroSection() {
         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 100%)' }} />
       </motion.div>
       
-      {/* Architectural Subtle Outline Watermark */}
-      <motion.div 
-        className="desktop-only"
-        style={{ 
-          position: 'absolute', 
-          bottom: '-1.5vh', 
-          left: '24px', 
-          width: '100%', 
-          textAlign: 'left', 
-          pointerEvents: 'none',
-          zIndex: 5,
-          y: outlineY,
-          opacity: outlineOpacity,
-        }}
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 0.85, y: 0 }}
-        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <h2 style={{
-          fontFamily: 'var(--font-heading)',
-          fontSize: 'clamp(4rem, 12vw, 11rem)',
-          fontWeight: 800,
-          color: 'transparent',
-          WebkitTextStroke: '1.5px rgba(255, 255, 255, 0.2)',
-          whiteSpace: 'nowrap',
-          margin: 0,
-          lineHeight: 1,
-          letterSpacing: '-0.02em',
-          userSelect: 'none',
-        }}>
-          SS DEVELOPERS
-        </h2>
-      </motion.div>
+
 
       {/* Main Content */}
       <motion.div 
@@ -91,6 +57,46 @@ function HeroSection() {
         </motion.div>
       </motion.div>
     </section>
+  );
+}
+
+/* =========================================================
+   2. TRANSITION ZOOM TEXT
+   ========================================================= */
+function ZoomTransition() {
+  const { scrollYProgress } = useScroll({
+    offset: ["start start", "end start"]
+  });
+  
+  // As user scrolls down past the hero, the text grows from 1 to massive, fading out
+  const scale = useTransform(scrollYProgress, [0, 0.2], [1, 20]);
+  const opacity = useTransform(scrollYProgress, [0.1, 0.2], [1, 0]);
+  const display = useTransform(scrollYProgress, (v) => v > 0.25 ? 'none' : 'flex');
+
+  return (
+    <motion.div style={{
+      position: 'fixed',
+      top: 0, left: 0, width: '100%', height: '100vh',
+      display,
+      justifyContent: 'center',
+      alignItems: 'center',
+      pointerEvents: 'none',
+      zIndex: 5
+    }}>
+      <motion.h2 style={{
+        fontFamily: 'var(--font-heading)',
+        fontSize: '8vw',
+        fontWeight: 700,
+        color: '#fff',
+        scale,
+        opacity,
+        textAlign: 'center',
+        whiteSpace: 'nowrap',
+        textShadow: '0 4px 24px rgba(0,0,0,0.2)'
+      }}>
+        SS DEVELOPERS
+      </motion.h2>
+    </motion.div>
   );
 }
 
@@ -389,6 +395,7 @@ export default function HomePage() {
 
   return (
     <div style={{ backgroundColor: 'var(--color-bg)' }}>
+      <ZoomTransition />
       <HeroSection />
       <AerialSection />
       <RewiredSection />
