@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import ParticleText from '../../components/ParticleText';
 
 /* =========================================================
    1. HERO SECTION
@@ -12,6 +11,8 @@ function HeroSection() {
   const y1 = useTransform(scrollY, [0, 1000], [0, 200]);
   const scale = useTransform(scrollY, [0, 1000], [1, 1.2]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+  const outlineY = useTransform(scrollY, [0, 800], [0, 120]);
+  const outlineOpacity = useTransform(scrollY, [0, 450], [0.85, 0]);
 
   return (
     <section style={{ position: 'relative', height: '100vh', overflow: 'hidden', backgroundColor: 'var(--color-bg)' }}>
@@ -25,8 +26,39 @@ function HeroSection() {
         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 100%)' }} />
       </motion.div>
       
-      {/* Interactive Atom Particle Text Animation */}
-      <ParticleText text="SS DEVELOPERS" />
+      {/* Architectural Subtle Outline Watermark */}
+      <motion.div 
+        className="desktop-only"
+        style={{ 
+          position: 'absolute', 
+          bottom: '-1.5vh', 
+          left: '24px', 
+          width: '100%', 
+          textAlign: 'left', 
+          pointerEvents: 'none',
+          zIndex: 5,
+          y: outlineY,
+          opacity: outlineOpacity,
+        }}
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 0.85, y: 0 }}
+        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <h2 style={{
+          fontFamily: 'var(--font-heading)',
+          fontSize: 'clamp(4rem, 12vw, 11rem)',
+          fontWeight: 800,
+          color: 'transparent',
+          WebkitTextStroke: '1.5px rgba(255, 255, 255, 0.2)',
+          whiteSpace: 'nowrap',
+          margin: 0,
+          lineHeight: 1,
+          letterSpacing: '-0.02em',
+          userSelect: 'none',
+        }}>
+          SS DEVELOPERS
+        </h2>
+      </motion.div>
 
       {/* Main Content */}
       <motion.div 
