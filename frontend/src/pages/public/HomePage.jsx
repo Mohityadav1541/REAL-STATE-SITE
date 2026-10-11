@@ -25,10 +25,8 @@ function HeroSection() {
         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 100%)' }} />
       </motion.div>
       
-      {/* Premium Parallax Background Text at Bottom - Replaced with ParticleText */}
-      <div className="desktop-only">
-        <ParticleText text="SS DEVELOPERS" />
-      </div>
+      {/* Interactive Atom Particle Text Animation */}
+      <ParticleText text="SS DEVELOPERS" />
 
       {/* Main Content */}
       <motion.div 
