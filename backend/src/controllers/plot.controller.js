@@ -6,7 +6,7 @@ const plotEmitter = require('../utils/events');
 const getPlotById = async (req, res) => {
   try {
     const { id } = req.params;
-    const plot = await prisma.plot.findUnique({
+    const plot = await prisma.plot.findFirst({
       where: { id, isActive: true },
       include: {
         project: {

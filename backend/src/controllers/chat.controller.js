@@ -14,7 +14,7 @@ exports.handleChat = async (req, res, next) => {
     }
 
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
+    const model = genAI.getGenerativeModel({ model: process.env.GEMINI_MODEL || 'gemini-1.5-flash' });
 
     const systemPrompt = `You are a helpful and professional real estate assistant for 'SS Developers'.
 SS Developers specializes in premium industrial real estate, plots, warehouses, and built-to-suit factories.

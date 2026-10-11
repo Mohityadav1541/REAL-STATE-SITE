@@ -157,6 +157,13 @@ function ZoomTransition() {
 
       const currentScroll = scrollY.get();
 
+      // If user has scrolled well past the hero into subsequent sections, skip heavy rendering
+      if (currentScroll > 550) {
+        ctx.clearRect(0, 0, width, height);
+        animationFrameId = requestAnimationFrame(render);
+        return;
+      }
+
       // Starts breaking into atoms at 120px scroll, fully fallen down and gone by 480px scroll
       const breakStart = 120;
       const breakEnd = 480;

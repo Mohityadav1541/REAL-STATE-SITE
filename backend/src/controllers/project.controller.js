@@ -3,43 +3,58 @@ const cloudinary = require('../utils/cloudinary');
 const { v4: uuidv4 } = require('uuid');
 const plotEmitter = require('../utils/events');
 
+const safeJsonParse = (val, fallback = []) => {
+  if (!val) return fallback;
+  if (typeof val !== 'string') return Array.isArray(val) ? val : fallback;
+  try {
+    const parsed = JSON.parse(val);
+    return Array.isArray(parsed) ? parsed : fallback;
+  } catch {
+    return fallback;
+  }
+};
+
 // ─── Public Controllers ───────────────────────────────────────
 
 const getAllProjects = async (req, res) => {
   try {
-    const projects = await prisma.project.findMany({
-      where: { isActive: true },
-      include: {
-        images: { orderBy: { order: 'asc' } },
-        _count: {
-          select: {
-            plots: { where: { isActive: true } },
+    const [projects, counts] = await Promise.all([
+      prisma.project.findMany({
+        where: { isActive: true },
+        include: {
+          images: { orderBy: { order: 'asc' } },
+          _count: {
+            select: {
+              plots: { where: { isActive: true } },
+            },
           },
         },
-      },
-      orderBy: { createdAt: 'asc' },
+        orderBy: { createdAt: 'asc' },
+      }),
+      prisma.plot.groupBy({
+        by: ['projectId', 'status'],
+        where: { isActive: true },
+        _count: { status: true },
+      }),
+    ]);
+
+    // Group plot counts by project
+    const statusMapByProject = {};
+    counts.forEach((c) => {
+      if (!statusMapByProject[c.projectId]) statusMapByProject[c.projectId] = {};
+      statusMapByProject[c.projectId][c.status] = c._count.status;
     });
 
-    // Get plot availability counts per project
-    const projectsWithCounts = await Promise.all(
-      projects.map(async (p) => {
-        const parsedProject = {
-          ...p,
-          highlights: p.highlights ? JSON.parse(p.highlights) : [],
-          connectivity: p.connectivity ? JSON.parse(p.connectivity) : [],
-          infrastructure: p.infrastructure ? JSON.parse(p.infrastructure) : [],
-          amenities: p.amenities ? JSON.parse(p.amenities) : [],
-        };
-        const counts = await prisma.plot.groupBy({
-          by: ['status'],
-          where: { projectId: p.id, isActive: true },
-          _count: { status: true },
-        });
-        const statusMap = {};
-        counts.forEach((c) => { statusMap[c.status] = c._count.status; });
-        return { ...parsedProject, plotCounts: statusMap };
-      })
-    );
+    const projectsWithCounts = projects.map((p) => {
+      const parsedProject = {
+        ...p,
+        highlights: safeJsonParse(p.highlights),
+        connectivity: safeJsonParse(p.connectivity),
+        infrastructure: safeJsonParse(p.infrastructure),
+        amenities: safeJsonParse(p.amenities),
+      };
+      return { ...parsedProject, plotCounts: statusMapByProject[p.id] || {} };
+    });
 
     res.json({ projects: projectsWithCounts });
   } catch (error) {
@@ -51,7 +66,7 @@ const getAllProjects = async (req, res) => {
 const getProjectBySlug = async (req, res) => {
   try {
     const { slug } = req.params;
-    const project = await prisma.project.findUnique({
+    const project = await prisma.project.findFirst({
       where: { slug, isActive: true },
       include: {
         images: { orderBy: { order: 'asc' } },
@@ -77,10 +92,10 @@ const getProjectBySlug = async (req, res) => {
 
     const parsedProject = {
       ...project,
-      highlights: project.highlights ? JSON.parse(project.highlights) : [],
-      connectivity: project.connectivity ? JSON.parse(project.connectivity) : [],
-      infrastructure: project.infrastructure ? JSON.parse(project.infrastructure) : [],
-      amenities: project.amenities ? JSON.parse(project.amenities) : [],
+      highlights: safeJsonParse(project.highlights),
+      connectivity: safeJsonParse(project.connectivity),
+      infrastructure: safeJsonParse(project.infrastructure),
+      amenities: safeJsonParse(project.amenities),
     };
 
     res.json({ project: { ...parsedProject, plotCounts: statusMap } });
@@ -93,7 +108,7 @@ const getProjectBySlug = async (req, res) => {
 const getProjectPlots = async (req, res) => {
   try {
     const { slug } = req.params;
-    const project = await prisma.project.findUnique({
+    const project = await prisma.project.findFirst({
       where: { slug, isActive: true },
       select: { id: true, name: true, slug: true },
     });
@@ -123,7 +138,7 @@ const streamProjectPlots = async (req, res) => {
 
   const sendPlots = async () => {
     try {
-      const project = await prisma.project.findUnique({
+      const project = await prisma.project.findFirst({
         where: { slug, isActive: true },
         select: { id: true, name: true, slug: true },
       });
@@ -168,10 +183,10 @@ const adminGetAllProjects = async (req, res) => {
     
     const parsedProjects = projects.map(p => ({
       ...p,
-      highlights: p.highlights ? JSON.parse(p.highlights) : [],
-      connectivity: p.connectivity ? JSON.parse(p.connectivity) : [],
-      infrastructure: p.infrastructure ? JSON.parse(p.infrastructure) : [],
-      amenities: p.amenities ? JSON.parse(p.amenities) : [],
+      highlights: safeJsonParse(p.highlights),
+      connectivity: safeJsonParse(p.connectivity),
+      infrastructure: safeJsonParse(p.infrastructure),
+      amenities: safeJsonParse(p.amenities),
     }));
 
     res.json({ projects: parsedProjects });
@@ -194,10 +209,10 @@ const adminGetProject = async (req, res) => {
     
     const parsedProject = {
       ...project,
-      highlights: project.highlights ? JSON.parse(project.highlights) : [],
-      connectivity: project.connectivity ? JSON.parse(project.connectivity) : [],
-      infrastructure: project.infrastructure ? JSON.parse(project.infrastructure) : [],
-      amenities: project.amenities ? JSON.parse(project.amenities) : [],
+      highlights: safeJsonParse(project.highlights),
+      connectivity: safeJsonParse(project.connectivity),
+      infrastructure: safeJsonParse(project.infrastructure),
+      amenities: safeJsonParse(project.amenities),
     };
 
     res.json({ project: parsedProject });
