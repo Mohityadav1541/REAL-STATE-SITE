@@ -14,7 +14,7 @@ exports.handleChat = async (req, res, next) => {
     }
 
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: process.env.GEMINI_MODEL || 'gemini-1.5-flash' });
+    const modelName = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
 
     const systemPrompt = `You are a helpful and professional real estate assistant for 'SS Developers'.
 SS Developers specializes in premium industrial real estate, plots, warehouses, and built-to-suit factories.
@@ -31,9 +31,19 @@ Keep your answers concise, professional, and directly related to industrial real
       formattedPrompt = systemPrompt + "\n\nChat History:\n" + historyText + "\n\nUser Message: " + message;
     }
 
-    const result = await model.generateContent(formattedPrompt);
-    const response = await result.response;
-    const text = response.text();
+    let text;
+    try {
+      const model = genAI.getGenerativeModel({ model: modelName });
+      const result = await model.generateContent(formattedPrompt);
+      const response = await result.response;
+      text = response.text();
+    } catch (modelError) {
+      console.warn(`Gemini generation with ${modelName} failed (${modelError.message}). Attempting fallback to gemini-flash-latest...`);
+      const fallbackModel = genAI.getGenerativeModel({ model: 'gemini-flash-latest' });
+      const fallbackResult = await fallbackModel.generateContent(formattedPrompt);
+      const fallbackResponse = await fallbackResult.response;
+      text = fallbackResponse.text();
+    }
 
     res.json({ reply: text });
   } catch (error) {
