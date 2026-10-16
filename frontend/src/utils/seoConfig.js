@@ -173,8 +173,8 @@ export function getProjectSchema(project) {
     },
     geo: {
       '@type': 'GeoCoordinates',
-      latitude: project.lat || 21.1702,
-      longitude: project.lng || 72.8311,
+      latitude: project.lat || 26.766572,
+      longitude: project.lng || 75.8370448,
     },
     containedInPlace: {
       '@type': 'AdministrativeArea',

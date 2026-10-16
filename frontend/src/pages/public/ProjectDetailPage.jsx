@@ -241,20 +241,43 @@ export default function ProjectDetailPage() {
               </div>
             </div>
             
-            <div style={{ height: 400, borderRadius: 'var(--radius-xl)', overflow: 'hidden', border: '1px solid var(--color-border-light)', zIndex: 1 }}>
-              {(project.lat && project.lng) ? (
-                <MapContainer center={[project.lat, project.lng]} zoom={13} style={{ width: '100%', height: '100%' }}>
-                  <TileLayer 
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" 
-                  />
-                  <Marker position={[project.lat, project.lng]} />
-                </MapContainer>
-              ) : (
-                <div style={{ width: '100%', height: '100%', background: '#e2e8f0', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#64748b' }}>
-                  Map data not available
-                </div>
-              )}
+            <div style={{ height: 400, borderRadius: 'var(--radius-xl)', overflow: 'hidden', border: '1px solid var(--color-border-light)', zIndex: 1, position: 'relative' }}>
+              <MapContainer 
+                center={[project.lat || 26.766572, project.lng || 75.8370448]} 
+                zoom={14} 
+                style={{ width: '100%', height: '100%' }}
+                scrollWheelZoom={false}
+              >
+                <TileLayer 
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" 
+                />
+                <Marker position={[project.lat || 26.766572, project.lng || 75.8370448]} />
+              </MapContainer>
+              <div style={{ position: 'absolute', bottom: 12, right: 12, zIndex: 1000 }}>
+                <a 
+                  href={`https://www.google.com/maps/search/?api=1&query=${project.lat || 26.766572},${project.lng || 75.8370448}`} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  style={{ 
+                    background: 'rgba(255, 255, 255, 0.95)', 
+                    backdropFilter: 'blur(8px)',
+                    color: 'var(--color-navy-900)',
+                    border: '1px solid rgba(0,0,0,0.1)',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.15)', 
+                    display: 'inline-flex', 
+                    alignItems: 'center', 
+                    gap: 6, 
+                    fontSize: '0.82rem', 
+                    fontWeight: 600,
+                    padding: '8px 14px',
+                    borderRadius: 'var(--radius-full)',
+                    textDecoration: 'none'
+                  }}
+                >
+                  <Map size={15} color="var(--color-gold-500)" /> Open in Google Maps
+                </a>
+              </div>
             </div>
           </div>
         </div>
