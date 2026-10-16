@@ -244,7 +244,10 @@ export default function ProjectDetailPage() {
             <div style={{ height: 400, borderRadius: 'var(--radius-xl)', overflow: 'hidden', border: '1px solid var(--color-border-light)', zIndex: 1 }}>
               {(project.lat && project.lng) ? (
                 <MapContainer center={[project.lat, project.lng]} zoom={13} style={{ width: '100%', height: '100%' }}>
-                  <TileLayer url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png" />
+                  <TileLayer 
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" 
+                  />
                   <Marker position={[project.lat, project.lng]} />
                 </MapContainer>
               ) : (
