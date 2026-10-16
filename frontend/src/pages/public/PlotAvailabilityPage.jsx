@@ -7,6 +7,7 @@ import { formatArea } from '../../utils/helpers';
 import PlotModal from '../../components/PlotModal';
 import EnquiryModal from '../../components/EnquiryModal';
 import { usePlotsStream } from '../../hooks/usePlotsStream';
+import SEO from '../../components/SEO';
 
 const STATUS_CONFIG = {
   AVAILABLE: { label: 'Available', color: '#15803d', bg: '#dcfce7', border: '#86efac' },
@@ -33,7 +34,7 @@ export default function PlotAvailabilityPage() {
   const allPlots = data?.plots || [];
 
   useEffect(() => {
-    if (project) document.title = `Plot Availability – ${project.name} | SS Developers`;
+    if (project) document.title = `Plot Availability – ${project.name} | RRR Developers`;
   }, [project]);
 
   const filteredPlots = allPlots.filter((p) => {
@@ -68,6 +69,23 @@ export default function PlotAvailabilityPage() {
 
   return (
     <div style={{ paddingTop: 72, minHeight: '100vh', background: 'var(--color-bg)' }}>
+      <SEO
+        title={`Available Industrial Plots – ${project.name} | RRR Developers`}
+        description={`Check real-time available, booked, and sold industrial plots at ${project.name} in ${project.location}, Gujarat. Review dimensions, facing, road widths, and layout.`}
+        canonical={`/projects/${project.slug}/plots`}
+        keywords={[
+          `${project.name} plot availability`,
+          `Industrial plots in ${project.location}`,
+          'Industrial plots for sale Gujarat',
+          'RRR Developers plots',
+        ]}
+        breadcrumbs={[
+          { name: 'Projects', path: '/projects' },
+          { name: project.name, path: `/projects/${project.slug}` },
+          { name: 'Plot Availability', path: `/projects/${project.slug}/plots` },
+        ]}
+      />
+
       {/* Header */}
       <div className="pa-header">
         <div className="container pa-header-inner">

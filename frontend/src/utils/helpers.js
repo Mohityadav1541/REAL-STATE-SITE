@@ -41,7 +41,7 @@ export const getPlotWhatsApp = (plotNumber, projectName) => {
 };
 
 export const getGeneralWhatsApp = () => {
-  const msg = `Hello SS Developers,\nI am interested in your industrial land/plot offerings. Please contact me.`;
+  const msg = `Hello RRR Developers,\nI am interested in your industrial land/plot offerings. Please contact me.`;
   return getWhatsAppURL(msg);
 };
 

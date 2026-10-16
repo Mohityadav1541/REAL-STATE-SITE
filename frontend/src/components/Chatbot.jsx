@@ -8,7 +8,7 @@ const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { role: 'assistant', content: 'Hi! I am the SS Developers AI assistant. How can I help you find the perfect industrial plot or facility?' }
+    { role: 'assistant', content: 'Hi! I am the RRR Developers AI assistant. How can I help you find the perfect industrial plot or facility?' }
   ]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);

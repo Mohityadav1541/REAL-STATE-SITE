@@ -1,18 +1,27 @@
-import { useEffect } from 'react';
 import { motion } from 'framer-motion';
+import SEO from '../../components/SEO';
 
 export default function WhyUsPage() {
-  useEffect(() => {
-    document.title = 'Why SS Developers';
-    window.scrollTo(0, 0);
-  }, []);
-
   return (
     <>
+      <SEO
+        title="Why Choose RRR Developers | Gujarat Industrial Land Specialists"
+        description="Discover why leading manufacturers and logistics operators choose RRR Developers for transparent documentation, heavy freight connectivity, and prime Gujarat locations."
+        canonical="/why-us"
+        keywords={[
+          'Why RRR Developers',
+          'Industrial land benefits Gujarat',
+          'Industrial zoning Gujarat',
+          'Industrial real estate developers',
+        ]}
+        breadcrumbs={[{ name: 'Why Us', path: '/why-us' }]}
+      />
+
       <div className="page-header" style={{ textAlign: 'center', padding: '140px 0 60px', background: 'var(--color-bg)', borderBottom: '1px solid var(--color-border)' }}>
         <div className="container">
-          <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2.5rem, 5vw, 4rem)', color: 'var(--color-text-primary)', fontWeight: 500, letterSpacing: '-0.02em' }}>
-            Why SS Developers
+          <span className="section-label">Our Advantages</span>
+          <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2.5rem, 5vw, 4rem)', color: 'var(--color-text-primary)', fontWeight: 500, letterSpacing: '-0.02em', marginTop: '0.5rem' }}>
+            Why Choose RRR Developers
           </h1>
         </div>
       </div>

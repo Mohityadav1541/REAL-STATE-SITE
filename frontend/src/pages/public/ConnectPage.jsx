@@ -5,6 +5,8 @@ import { toast } from 'react-hot-toast';
 import { Phone, MessageCircle, CheckCircle, ArrowRight } from 'lucide-react';
 import { publicApi } from '../../lib/api';
 import { getProjectWhatsApp } from '../../utils/helpers';
+import SEO from '../../components/SEO';
+import { trackEnquirySubmit } from '../../utils/analytics';
 
 export default function ConnectPage() {
   const [searchParams] = useSearchParams();
@@ -17,13 +19,14 @@ export default function ConnectPage() {
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    document.title = 'Connect – SS Developers';
+    document.title = 'Connect – RRR Developers';
   }, []);
 
   const mutation = useMutation({
     mutationFn: (data) => publicApi.submitLead(data),
     onSuccess: () => {
       setSubmitted(true);
+      trackEnquirySubmit(source || 'QR_CONNECT');
       toast.success('Thank you! We will contact you shortly.');
     },
     onError: (err) => {
@@ -56,20 +59,26 @@ export default function ConnectPage() {
   };
 
   const isQR = source === 'PROJECT_QR' || source === 'PLOT_QR';
-  const whatsappUrl = isQR ? getProjectWhatsApp('SS Developers QR Lead') : getProjectWhatsApp('SS Developers');
+  const whatsappUrl = isQR ? getProjectWhatsApp('RRR Developers QR Lead') : getProjectWhatsApp('RRR Developers');
 
   return (
     <div className="connect-wrapper">
+      <SEO
+        title="Direct Connection | RRR Developers"
+        description="Direct enquiry and plot reservation connection portal for RRR Developers."
+        canonical="/connect"
+        noindex={true}
+      />
       <div className="connect-bg" />
       <div className="container" style={{ position: 'relative', zIndex: 1, padding: '40px 20px', maxWidth: 480 }}>
         
         {/* Brand Header */}
         <div style={{ textAlign: 'center', marginBottom: 'var(--space-8)' }}>
           <div className="connect-logo">
-            <span style={{ fontSize: 24, fontWeight: 700, fontFamily: 'var(--font-heading)', color: 'var(--color-white)' }}>SS</span>
+            <span style={{ fontSize: 20, fontWeight: 700, fontFamily: 'var(--font-heading)', color: 'var(--color-white)', letterSpacing: '-0.02em' }}>RRR</span>
           </div>
           <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'var(--text-3xl)', color: 'var(--color-text-primary)', marginBottom: 8, fontWeight: 500, letterSpacing: '-0.02em' }}>
-            SS Developers
+            RRR Developers
           </h1>
           {isQR ? (
             <p style={{ color: 'var(--color-text-secondary)', fontSize: 'var(--text-sm)', letterSpacing: '0.05em' }}>

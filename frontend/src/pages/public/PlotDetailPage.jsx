@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { 
@@ -7,6 +7,8 @@ import {
 import { publicApi } from '../../lib/api';
 import { getProjectWhatsApp } from '../../utils/helpers';
 import EnquiryModal from '../../components/EnquiryModal';
+import SEO from '../../components/SEO';
+import { trackPlotView } from '../../utils/analytics';
 
 export default function PlotDetailPage() {
   const { id } = useParams();
@@ -17,15 +19,39 @@ export default function PlotDetailPage() {
     queryFn: () => publicApi.getPlot(id),
   });
 
-  if (isLoading) return <div className="page-loader"><span className="spinner spinner-lg" /></div>;
-  if (error || !data?.plot) return <div className="error-message">Plot not found</div>;
+  const plot = data?.plot;
+  const project = plot?.project;
+  const isAvailable = plot?.status === 'AVAILABLE';
 
-  const plot = data.plot;
-  const project = plot.project;
-  const isAvailable = plot.status === 'AVAILABLE';
+  useEffect(() => {
+    if (plot && project) {
+      trackPlotView(project.slug, plot.plotNumber, plot.status, plot.area);
+    }
+  }, [plot, project]);
+
+  if (isLoading) return <div className="page-loader"><span className="spinner spinner-lg" /></div>;
+  if (error || !plot || !project) return <div className="error-message">Plot not found</div>;
 
   return (
     <div className="bg-bg" style={{ minHeight: '100vh', padding: '120px 0 60px' }}>
+      <SEO
+        title={`Plot ${plot.plotNumber} – ${project.name} | RRR Developers`}
+        description={`Plot ${plot.plotNumber} at ${project.name}, ${project.location}, Gujarat. Area: ${plot.area} sqft, Road Width: ${plot.roadWidth}, Facing: ${plot.facing}, Status: ${plot.status}.`}
+        canonical={`/plots/${plot.id}`}
+        keywords={[
+          `Plot ${plot.plotNumber}`,
+          `${project.name} plots`,
+          `Industrial plots ${project.location}`,
+          'Gujarat industrial plots',
+        ]}
+        breadcrumbs={[
+          { name: 'Projects', path: '/projects' },
+          { name: project.name, path: `/projects/${project.slug}` },
+          { name: 'Plots', path: `/projects/${project.slug}/plots` },
+          { name: `Plot ${plot.plotNumber}`, path: `/plots/${plot.id}` },
+        ]}
+      />
+
       <div className="container">
         
         {/* Back navigation */}

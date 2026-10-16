@@ -76,7 +76,7 @@ const submitLead = async (req, res) => {
 
     res.status(201).json({
       success: true,
-      message: 'Thank you. Our SS Developers team will contact you shortly.',
+      message: 'Thank you. Our RRR Developers team will contact you shortly.',
       leadId: lead.id,
     });
   } catch (error) {

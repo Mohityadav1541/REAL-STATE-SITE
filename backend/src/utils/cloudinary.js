@@ -11,7 +11,7 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary,
   params: {
-    folder: 'ssdevelopers',
+    folder: 'rrrdevelopers',
     allowed_formats: ['jpg', 'jpeg', 'png', 'webp', 'pdf'],
     transformation: [{ quality: 'auto', fetch_format: 'auto' }],
   },

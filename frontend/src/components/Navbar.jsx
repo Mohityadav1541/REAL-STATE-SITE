@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Phone } from 'lucide-react';
+import { trackPhoneClick } from '../utils/analytics';
 
 const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/projects', label: 'Projects' },
-  { href: '/why-us', label: 'Why SS Developers' },
+  { href: '/why-us', label: 'Why RRR Developers' },
   { href: '/investment', label: 'Investment Advantage' },
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
@@ -34,9 +35,9 @@ export default function Navbar() {
       <div className="container navbar-inner">
         {/* Logo */}
         <Link to="/" className="navbar-logo">
-          <div className="logo-mark">SS</div>
+          <div className="logo-mark">RRR</div>
           <div className="logo-text">
-            <span className="logo-name">SS DEVELOPERS</span>
+            <span className="logo-name">RRR DEVELOPERS</span>
             <span className="logo-tagline">Premium Industrial Land</span>
           </div>
         </Link>
@@ -59,7 +60,8 @@ export default function Navbar() {
           <a
             href={`tel:9898649979`}
             className="navbar-phone"
-            aria-label="Call SS Developers"
+            aria-label="Call RRR Developers"
+            onClick={() => trackPhoneClick('navbar')}
           >
             <Phone size={14} />
             <span>9898649979</span>
@@ -148,10 +150,10 @@ export default function Navbar() {
           align-items: center;
           justify-content: center;
           font-family: var(--font-heading);
-          font-size: 16px;
-          font-weight: 500;
+          font-size: 13px;
+          font-weight: 600;
           color: var(--color-white);
-          letter-spacing: -0.02em;
+          letter-spacing: -0.01em;
         }
 
         .logo-text {

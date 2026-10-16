@@ -11,6 +11,9 @@ import { getProjectWhatsApp } from '../../utils/helpers';
 import EnquiryModal from '../../components/EnquiryModal';
 import InteractiveMasterPlan from '../../components/InteractiveMasterPlan';
 import { usePlotsStream } from '../../hooks/usePlotsStream';
+import SEO from '../../components/SEO';
+import { getProjectSchema } from '../../utils/seoConfig';
+import { trackProjectView } from '../../utils/analytics';
 import 'leaflet/dist/leaflet.css';
 
 // Fix for leaflet markers
@@ -43,7 +46,7 @@ export default function ProjectDetailPage() {
 
   useEffect(() => {
     if (data?.project) {
-      document.title = `${data.project.name} – SS Developers`;
+      trackProjectView(data.project.slug, data.project.name);
     }
   }, [data]);
 
@@ -61,6 +64,26 @@ export default function ProjectDetailPage() {
 
   return (
     <div className="project-detail">
+      <SEO
+        title={`${project.name}, ${project.location} | RRR Developers`}
+        description={`${project.name} offers government-approved industrial land and plots in ${project.location}, Gujarat. Features wide freight roads, utility lines, 24/7 security, and direct highway connectivity.`}
+        canonical={`/projects/${project.slug}`}
+        ogImage={heroImage}
+        keywords={[
+          `${project.name}`,
+          `Industrial land in ${project.location}`,
+          `Industrial plots ${project.location}`,
+          'Industrial land in Gujarat',
+          'Industrial plots for sale',
+          'RRR Developers',
+        ]}
+        breadcrumbs={[
+          { name: 'Projects', path: '/projects' },
+          { name: project.name, path: `/projects/${project.slug}` },
+        ]}
+        schema={getProjectSchema(project)}
+      />
+
       {/* 1. PROJECT HERO */}
       <section className="project-hero" style={{ backgroundImage: `url(${heroImage})` }}>
         <div className="project-hero-overlay" />
@@ -245,7 +268,13 @@ export default function ProjectDetailPage() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 'var(--space-4)' }}>
               {gallery.map(img => (
                 <div key={img.id} style={{ height: 250, borderRadius: 'var(--radius-lg)', overflow: 'hidden', background: '#f1f5f9' }}>
-                  <img src={img.url} alt="Gallery" style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }} className="hover-zoom" />
+                  <img
+                    src={img.url}
+                    alt={`${project.name} – Industrial facility view in ${project.location}, Gujarat`}
+                    loading="lazy"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }}
+                    className="hover-zoom"
+                  />
                 </div>
               ))}
             </div>

@@ -222,7 +222,7 @@ export default function AdminProjectEdit() {
                 <input
                   type="text"
                   className="form-input"
-                  placeholder="e.g. SS Industrial Park 1"
+                  placeholder="e.g. Project 1"
                   value={form.name}
                   onChange={(e) => {
                     const val = e.target.value;
@@ -244,7 +244,7 @@ export default function AdminProjectEdit() {
                 <input
                   type="text"
                   className="form-input"
-                  placeholder="e.g. ss1 or ss-industrial-park-1"
+                  placeholder="e.g. project1"
                   value={form.slug}
                   onChange={(e) => setForm({ ...form, slug: e.target.value })}
                   required

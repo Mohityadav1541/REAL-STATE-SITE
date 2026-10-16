@@ -5,10 +5,10 @@ const bcrypt = require('bcryptjs');
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log('🌱 Seeding SS Developers database...');
+  console.log('🌱 Seeding RRR Developers database...');
 
   // ─── Admin ─────────────────────────────────────────────────
-  const adminEmail = (process.env.ADMIN_EMAIL || 'admin@ssdevelopers.com').toLowerCase();
+  const adminEmail = (process.env.ADMIN_EMAIL || 'admin@rrrdevelopers.com').toLowerCase();
   const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
   const hashedPassword = await bcrypt.hash(adminPassword, 12);
   const admin = await prisma.admin.upsert({
@@ -19,21 +19,26 @@ async function main() {
     create: {
       email: adminEmail,
       password: hashedPassword,
-      name: 'SS Developers Admin',
+      name: 'RRR Developers Admin',
     },
   });
   console.log('✅ Admin created/updated:', admin.email);
 
-  // ─── Project 1: SS Industrial Park 1 ────────────────────────
+  // Clean up legacy project slugs if they exist
+  await prisma.project.deleteMany({
+    where: { slug: { in: ['ss1', 'ss3'] } },
+  });
+
+  // ─── Project 1 ────────────────────────────────────────────
   const project1 = await prisma.project.upsert({
-    where: { slug: 'ss1' },
+    where: { slug: 'project1' },
     update: {},
     create: {
-      name: 'SS1',
-      slug: 'ss1',
+      name: 'Project 1',
+      slug: 'project1',
       tagline: 'Prime Industrial Land on Ubhrat Road',
       description:
-        'SS Industrial Park 1 is strategically located on Ubhraṭ Road, Maroli, offering government-approved industrial plots with exceptional highway connectivity. Designed for modern manufacturing, warehousing and logistics operations, this park provides all essential infrastructure including wide heavy-vehicle roads, underground utility lines, and 24/7 gated security. This premium master-planned industrial park provides a comprehensive ecosystem for businesses to scale. Featuring a dedicated commercial zone, robust power supply substations, advanced water treatment facilities, and wide 60-feet internal concrete roads. SS1 is the ideal choice for heavy engineering, textile manufacturing, and large-scale warehousing. Companies benefit from streamlined logistics, ample parking for heavy trailers, and proximity to major rail and sea freight terminals. Secure your future in an industrial hub that\'s built for tomorrow.',
+        'Project 1 is strategically located on Ubhraṭ Road, Maroli, offering government-approved industrial plots with exceptional highway connectivity. Designed for modern manufacturing, warehousing and logistics operations, this park provides all essential infrastructure including wide heavy-vehicle roads, underground utility lines, and 24/7 gated security. This premium master-planned industrial park provides a comprehensive ecosystem for businesses to scale. Featuring a dedicated commercial zone, robust power supply substations, advanced water treatment facilities, and wide 60-feet internal concrete roads. Project 1 is the ideal choice for heavy engineering, textile manufacturing, and large-scale warehousing. Companies benefit from streamlined logistics, ample parking for heavy trailers, and proximity to major rail and sea freight terminals. Secure your future in an industrial hub that\'s built for tomorrow.',
       location: 'Ubhraṭ Road, Maroli',
       address: 'Ubhraṭ Road, Maroli, Surat District, Gujarat',
       lat: 21.1702,
@@ -70,27 +75,27 @@ async function main() {
   });
   console.log('✅ Project 1 created:', project1.name);
 
-  // Add images for SS1
+  // Add images for Project 1
   await prisma.projectImage.deleteMany({ where: { projectId: project1.id } });
   await prisma.projectImage.createMany({
     data: [
-      { projectId: project1.id, url: '/images/ss1-hero.png', type: 'HERO', order: 1 },
-      { projectId: project1.id, url: 'https://images.unsplash.com/photo-1508450859948-4e04fabaa4ea?q=80&w=2079', type: 'GALLERY', order: 2 },
+      { projectId: project1.id, url: '/images/project1-hero.jpg', type: 'HERO', order: 1 },
+      { projectId: project1.id, url: '/images/project1-gallery.jpg', type: 'GALLERY', order: 2 },
       { projectId: project1.id, url: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069', type: 'GALLERY', order: 3 },
       { projectId: project1.id, url: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?q=80&w=2072', type: 'INFRASTRUCTURE', order: 4 },
     ]
   });
 
-  // ─── Project 2: SS Industrial Land 3 ────────────────────────
+  // ─── Project 2 ────────────────────────────────────────────
   const project2 = await prisma.project.upsert({
-    where: { slug: 'ss3' },
+    where: { slug: 'project2' },
     update: {},
     create: {
-      name: 'SS3',
-      slug: 'ss3',
+      name: 'Project 2',
+      slug: 'project2',
       tagline: 'Industrial Corridor Land at Hojwala',
       description:
-        'SS Industrial Land 3 at Hojwala is a government-approved industrial development positioned within 1 km of the Palsana-Hazira industrial belt. The property offers excellent freight road connectivity, secured campus infrastructure, and easy access to the expanding industrial corridor making it an ideal choice for manufacturers and logistics operators. Spread across a sprawling landscape, this industrial corridor project is engineered for high-capacity logistics and advanced manufacturing. It offers state-of-the-art infrastructure including uninterrupted industrial-grade power, high-speed fiber connectivity, and dedicated effluent treatment plants. The strategic positioning near the Palsana-Hazira belt ensures seamless supply chain operations and quick access to raw materials and markets. Designed with multiple large-scale buildings and built-to-suit shed options, this park provides maximum flexibility for growing enterprises to customize their operations perfectly.',
+        'Project 2 at Hojwala is a government-approved industrial development positioned within 1 km of the Palsana-Hazira industrial belt. The property offers excellent freight road connectivity, secured campus infrastructure, and easy access to the expanding industrial corridor making it an ideal choice for manufacturers and logistics operators. Spread across a sprawling landscape, this industrial corridor project is engineered for high-capacity logistics and advanced manufacturing. It offers state-of-the-art infrastructure including uninterrupted industrial-grade power, high-speed fiber connectivity, and dedicated effluent treatment plants. The strategic positioning near the Palsana-Hazira belt ensures seamless supply chain operations and quick access to raw materials and markets. Designed with multiple large-scale buildings and built-to-suit shed options, this park provides maximum flexibility for growing enterprises to customize their operations perfectly.',
       location: 'Hojwala',
       address: 'Hojwala, Surat District, Gujarat',
       lat: 21.2500,
@@ -126,12 +131,12 @@ async function main() {
   });
   console.log('✅ Project 2 created:', project2.name);
 
-  // Add images for SS3
+  // Add images for Project 2
   await prisma.projectImage.deleteMany({ where: { projectId: project2.id } });
   await prisma.projectImage.createMany({
     data: [
-      { projectId: project2.id, url: '/images/ss3-hero.png', type: 'HERO', order: 1 },
-      { projectId: project2.id, url: 'https://images.unsplash.com/photo-1565514020179-026b92b84bb6?q=80&w=2070', type: 'GALLERY', order: 2 },
+      { projectId: project2.id, url: '/images/project2-hero.jpg', type: 'HERO', order: 1 },
+      { projectId: project2.id, url: '/images/project2-gallery.jpg', type: 'GALLERY', order: 2 },
       { projectId: project2.id, url: 'https://images.unsplash.com/photo-1553456558-bef63debc0ad?q=80&w=2070', type: 'INFRASTRUCTURE', order: 3 },
     ]
   });
@@ -243,7 +248,7 @@ async function main() {
   console.log('✅ Sample site visit created');
 
   console.log('\n🎉 Database seeded successfully!');
-  console.log('📧 Admin login: admin@ssdevelopers.com');
+  console.log('📧 Admin login: admin@rrrdevelopers.com');
   console.log('🔑 Admin password: admin123');
 }
 

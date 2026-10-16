@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Phone, MapPin, MessageCircle } from 'lucide-react';
 import { getGeneralWhatsApp } from '../utils/helpers';
+import { trackPhoneClick, trackWhatsAppClick } from '../utils/analytics';
 
 const currentYear = new Date().getFullYear();
 
@@ -11,7 +12,7 @@ export default function Footer() {
         <div className="footer-grid">
           {/* Brand */}
           <div className="footer-brand">
-            <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '24px', fontWeight: 500, color: 'var(--color-white)', marginBottom: '8px', letterSpacing: '-0.02em' }}>SS DEVELOPERS</h2>
+            <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '24px', fontWeight: 500, color: 'var(--color-white)', marginBottom: '8px', letterSpacing: '-0.02em' }}>RRR DEVELOPERS</h2>
             <p className="footer-about">
               Government-approved industrial plots designed to drive modern manufacturing and logistics.
             </p>
@@ -33,8 +34,8 @@ export default function Footer() {
           <div className="footer-section">
             <h4 className="footer-heading">Our Projects</h4>
             <ul className="footer-links">
-              <li><Link to="/projects/ss-industrial-park-1">SS Industrial Park 1</Link></li>
-              <li><Link to="/projects/ss-industrial-land-3">SS Industrial Land 3</Link></li>
+              <li><Link to="/projects/project1">Project 1</Link></li>
+              <li><Link to="/projects/project2">Project 2</Link></li>
             </ul>
             <h4 className="footer-heading" style={{ marginTop: 'var(--space-6)' }}>We Offer</h4>
             <ul className="footer-links">
@@ -50,7 +51,9 @@ export default function Footer() {
             <div className="footer-contact">
               <div className="footer-contact-item">
                 <Phone size={15} />
-                <a href="tel:9898649979">9898649979</a>
+                <a href="tel:9898649979" onClick={() => trackPhoneClick('footer')}>
+                  9898649979
+                </a>
               </div>
               <div className="footer-contact-item">
                 <MapPin size={15} />
@@ -67,6 +70,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-whatsapp btn-sm footer-whatsapp"
+              onClick={() => trackWhatsAppClick('footer')}
             >
               <MessageCircle size={15} />
               WhatsApp Us
@@ -76,15 +80,15 @@ export default function Footer() {
 
         <div className="footer-bottom">
           <div className="footer-bottom-left">
-            <p>© {currentYear} SS Developers. All rights reserved.</p>
+            <p>© {currentYear} RRR Developers. All rights reserved.</p>
           </div>
           <div className="footer-bottom-right">
-            <span>www.ssdevelopers.com</span>
+            <span>www.rrrdevelopers.com</span>
           </div>
         </div>
         
         <div className="footer-massive-logo">
-          SS DEVELOPERS
+          RRR DEVELOPERS
         </div>
       </div>
 

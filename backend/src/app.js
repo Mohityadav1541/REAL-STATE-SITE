@@ -11,6 +11,7 @@ const leadRoutes = require('./routes/lead.routes');
 const siteVisitRoutes = require('./routes/siteVisit.routes');
 const adminRoutes = require('./routes/admin.routes');
 const chatRoutes = require('./routes/chat.routes');
+const sitemapRoutes = require('./routes/sitemap.routes');
 
 const app = express();
 
@@ -56,10 +57,12 @@ if (process.env.NODE_ENV !== 'test') {
 
 // ─── Health Check ─────────────────────────────────────────────
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', service: 'SS Developers API', timestamp: new Date().toISOString() });
+  res.json({ status: 'ok', service: 'RRR Developers API', timestamp: new Date().toISOString() });
 });
 
 // ─── Public Routes ────────────────────────────────────────────
+app.use('/', sitemapRoutes);
+app.use('/api', sitemapRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/plots', plotRoutes);

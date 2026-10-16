@@ -75,12 +75,8 @@
     <rect x="136" y="278" width="240" height="8" rx="4" fill="url(#goldShine)" />
     <rect x="176" y="292" width="160" height="4" rx="2" fill="url(#goldLight)" />
 
-    <!-- Iconic Bold Geometric "SS" Monogram -->
-    <!-- First 'S' -->
-    <path d="M164 340 C164 322 180 312 208 312 H236 V332 H208 C196 332 190 336 190 342 C190 348 196 352 210 354 L224 357 C246 361 258 372 258 392 C258 412 242 424 214 424 H184 V404 H214 C226 404 232 400 232 393 C232 386 226 382 212 379 L198 376 C176 372 164 360 164 340 Z" fill="url(#goldShine)" />
-
-    <!-- Second 'S' -->
-    <path d="M254 340 C254 322 270 312 298 312 H326 V332 H298 C286 332 280 336 280 342 C280 348 286 352 300 354 L314 357 C336 361 348 372 348 392 C348 412 332 424 304 424 H274 V404 H304 C316 404 322 400 322 393 C322 386 316 382 302 379 L288 376 C266 372 254 360 254 340 Z" fill="url(#goldShine)" />
+    <!-- Iconic Bold Geometric "RRR" Monogram -->
+    <text x="256" y="396" font-family="'Outfit', 'Inter', -apple-system, sans-serif" font-size="94" font-weight="800" fill="url(#goldShine)" text-anchor="middle" letter-spacing="4">RRR</text>
 
     <!-- Subtitle: DEVELOPERS -->
     <text x="256" y="460" font-family="'Outfit', 'Inter', -apple-system, sans-serif" font-size="28" font-weight="600" fill="url(#goldLight)" text-anchor="middle" letter-spacing="12">DEVELOPERS</text>

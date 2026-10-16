@@ -17,6 +17,7 @@ const SiteVisitPage = lazy(() => import('./pages/public/SiteVisitPage'));
 const AboutPage = lazy(() => import('./pages/public/AboutPage'));
 const WhyUsPage = lazy(() => import('./pages/public/WhyUsPage'));
 const InvestmentPage = lazy(() => import('./pages/public/InvestmentPage'));
+const NotFoundPage = lazy(() => import('./pages/public/NotFoundPage'));
 
 // Admin Pages
 const AdminLoginPage = lazy(() => import('./pages/admin/AdminLoginPage'));
@@ -54,6 +55,7 @@ export default function App() {
           <Route path="about" element={<AboutPage />} />
           <Route path="why-us" element={<WhyUsPage />} />
           <Route path="investment" element={<InvestmentPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
 
         {/* Admin Login */}

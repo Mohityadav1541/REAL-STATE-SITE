@@ -5,6 +5,8 @@ import { toast } from 'react-hot-toast';
 import { Calendar as CalendarIcon, CheckCircle, MessageCircle } from 'lucide-react';
 import { publicApi } from '../../lib/api';
 import { getGeneralWhatsApp } from '../../utils/helpers';
+import SEO from '../../components/SEO';
+import { trackSiteVisitRequest } from '../../utils/analytics';
 
 export default function SiteVisitPage() {
   const [searchParams] = useSearchParams();
@@ -25,7 +27,7 @@ export default function SiteVisitPage() {
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    document.title = 'Book Site Visit – SS Developers';
+    document.title = 'Book Site Visit – RRR Developers';
   }, []);
 
   // Fetch projects for dropdown
@@ -39,6 +41,7 @@ export default function SiteVisitPage() {
     mutationFn: (data) => publicApi.submitSiteVisit(data),
     onSuccess: () => {
       setSubmitted(true);
+      trackSiteVisitRequest(form.projectId);
       toast.success('Site visit requested successfully!');
     },
     onError: (err) => {
@@ -77,11 +80,24 @@ export default function SiteVisitPage() {
 
   return (
     <>
+      <SEO
+        title="Book an Industrial Land Site Visit | RRR Developers"
+        description="Schedule an on-site visit to inspect industrial land, infrastructure, and available plots at RRR Developers projects in Gujarat."
+        canonical="/site-visit"
+        keywords={[
+          'Book industrial site visit',
+          'Industrial land tour Gujarat',
+          'Inspect industrial plots Surat',
+          'RRR Developers site visit',
+        ]}
+        breadcrumbs={[{ name: 'Site Visit', path: '/site-visit' }]}
+      />
+
       <div className="page-header" style={{ textAlign: 'center', padding: '140px 0 60px', background: 'var(--color-bg)', borderBottom: '1px solid var(--color-border)' }}>
         <div className="container">
           <span className="section-label">Site Visit</span>
           <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2.5rem, 5vw, 4rem)', color: 'var(--color-text-primary)', marginTop: '1rem', fontWeight: 500, letterSpacing: '-0.02em' }}>
-            Book a Site Visit
+            Book an Industrial Land Site Visit
           </h1>
           <p style={{ color: 'var(--color-text-secondary)', fontSize: 'var(--text-lg)', marginTop: '1rem' }}>
             Experience our industrial parks firsthand. Schedule a guided tour with our experts.

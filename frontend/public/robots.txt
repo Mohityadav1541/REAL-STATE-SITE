@@ -1,0 +1,26 @@
+# Robots.txt for RRR Developers
+# Website: https://real-state-site-ashen.vercel.app
+
+User-agent: *
+Allow: /
+Allow: /projects
+Allow: /projects/*
+Allow: /about
+Allow: /why-us
+Allow: /investment
+Allow: /contact
+Allow: /site-visit
+Allow: /images/
+Allow: /assets/
+
+# Block administrative, private customer portals, and QR routing
+Disallow: /admin/
+Disallow: /admin/*
+Disallow: /c/
+Disallow: /c/*
+Disallow: /connect
+Disallow: /api/
+Disallow: /api/*
+
+# Production Sitemap
+Sitemap: https://real-state-site-ashen.vercel.app/sitemap.xml

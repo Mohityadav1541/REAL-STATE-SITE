@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import SEO from '../../components/SEO';
+import { getOrganizationSchema, getWebSiteSchema } from '../../utils/seoConfig';
 
 /* =========================================================
    1. HERO SECTION
@@ -18,7 +20,8 @@ function HeroSection() {
       <motion.div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', y: y1 }}>
         <motion.img 
           src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070" 
-          alt="Premium Industrial Real Estate" 
+          alt="RRR Developers – Government-approved industrial land and plots in Gujarat" 
+          fetchPriority="high"
           style={{ width: '100%', height: '100%', objectFit: 'cover', scale }} 
         />
         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 100%)' }} />
@@ -96,7 +99,7 @@ function ZoomTransition() {
     canvas.width = width;
     canvas.height = height;
 
-    const text = 'SS DEVELOPERS';
+    const text = 'RRR DEVELOPERS';
     const fontSize = Math.max(36, Math.min(width * 0.08, 110));
 
     let particles = [];
@@ -259,7 +262,12 @@ function AerialSection() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           style={{ position: 'relative', borderRadius: 'var(--radius-2xl)', overflow: 'hidden', height: '70vh' }}
         >
-          <img src="https://images.unsplash.com/photo-1508450859948-4e04fabaa4ea?q=80&w=2079" alt="Aerial Industrial" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          <img 
+            src="https://images.unsplash.com/photo-1508450859948-4e04fabaa4ea?q=80&w=2079" 
+            alt="Aerial view of master-planned industrial development in Gujarat with heavy vehicle roads" 
+            loading="lazy"
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+          />
           <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.3)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '60px' }}>
             <h2 style={{ fontFamily: 'var(--font-heading)', color: '#fff', fontSize: 'clamp(2rem, 5vw, 4rem)', fontWeight: 500, letterSpacing: '-0.02em', maxWidth: 800 }}>
               This isn't just about industrial land.
@@ -342,11 +350,16 @@ function TeamSection() {
           className="grid grid-2" style={{ alignItems: 'center' }}
         >
           <div style={{ borderRadius: 'var(--radius-2xl)', overflow: 'hidden', height: '600px' }}>
-            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=2070" alt="Team" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <img 
+              src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=2070" 
+              alt="RRR Developers advisory and industrial real estate team in Gujarat" 
+              loading="lazy"
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+            />
           </div>
           <div>
             <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2rem, 3vw, 3rem)', fontWeight: 500, color: 'var(--color-text-primary)', lineHeight: 1.2, marginBottom: '24px', letterSpacing: '-0.02em' }}>
-              At SS DEVELOPERS, our team doesn't just sell plots—they partner in your vision.
+              At RRR DEVELOPERS, our team doesn't just sell plots—they partner in your vision.
             </h2>
             <p style={{ fontSize: '1.1rem', color: 'var(--color-text-secondary)', lineHeight: 1.6, marginBottom: '40px' }}>
               Our experts are deeply invested in your success. They know every inch of the master plans, understand government regulations, and help you navigate the complexities of industrial real estate.
@@ -378,7 +391,7 @@ function HowWeHelpSection() {
           <div>
             <p style={{ fontSize: '14px', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'rgba(255,255,255,0.5)', marginBottom: '24px' }}>Services</p>
             <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(3rem, 5vw, 5rem)', fontWeight: 500, lineHeight: 1.1, letterSpacing: '-0.02em' }}>
-              How SS DEV<br />Can Help You
+              How RRR DEV<br />Can Help You
             </h2>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -429,9 +442,9 @@ function HowWeHelpSection() {
    ========================================================= */
 function SupportSection() {
   const cards = [
-    { title: 'Legal & Compliance', img: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=2070', desc: 'Navigate complex industrial regulations with ease.' },
-    { title: 'Infrastructure Setup', img: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=2070', desc: 'Power, water, and connectivity solutions.' },
-    { title: 'Construction & Development', img: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2071', desc: 'End-to-end building and architecture support.' },
+    { title: 'Legal & Compliance', img: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=2070', alt: 'Industrial land legal approval and regulatory compliance guidance in Gujarat', desc: 'Navigate complex industrial regulations with ease.' },
+    { title: 'Infrastructure Setup', img: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=2070', alt: 'Industrial utility connections, power substations, and wide internal roads', desc: 'Power, water, and connectivity solutions.' },
+    { title: 'Construction & Development', img: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2071', alt: 'Turnkey industrial warehouse construction and factory architecture', desc: 'End-to-end building and architecture support.' },
   ];
 
   return (
@@ -461,7 +474,7 @@ function SupportSection() {
               style={{ position: 'relative', borderRadius: '24px', overflow: 'hidden', height: '400px', cursor: 'pointer' }}
               className="support-card"
             >
-              <img src={card.img} alt={card.title} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }} className="support-img" />
+              <img src={card.img} alt={card.alt || card.title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }} className="support-img" />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '32px' }}>
                 <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.5rem', fontWeight: 500, color: '#fff', marginBottom: '8px' }}>
                   {card.title}
@@ -521,10 +534,6 @@ export default function HomePage() {
   const { hash } = useLocation();
 
   useEffect(() => {
-    document.title = 'SS Developers – Find Your Foundation';
-  }, []);
-
-  useEffect(() => {
     if (hash) {
       const element = document.getElementById(hash.substring(1));
       if (element) {
@@ -540,6 +549,21 @@ export default function HomePage() {
 
   return (
     <div style={{ backgroundColor: 'var(--color-bg)' }}>
+      <SEO
+        title="RRR Developers | Industrial Land and Plots in Gujarat"
+        description="RRR Developers offers government-approved industrial land and plots in Gujarat with wide heavy-vehicle roads, robust utility infrastructure, and highway connectivity."
+        canonical="/"
+        keywords={[
+          'Industrial plots for sale in Surat',
+          'Industrial land in Maroli',
+          'Industrial plots in Hojwala',
+          'Industrial land in Gujarat',
+          'Industrial land near the Palsana-Hazira belt',
+          'Industrial plots with highway connectivity',
+          'RRR Developers industrial projects',
+        ]}
+        schema={[getOrganizationSchema(), getWebSiteSchema()]}
+      />
       <ZoomTransition />
       <HeroSection />
       <AerialSection />

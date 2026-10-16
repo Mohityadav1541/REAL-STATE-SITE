@@ -4,6 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { Lock, User } from 'lucide-react';
 import { authApi } from '../../lib/api';
 import { useAuth } from '../../utils/helpers';
+import SEO from '../../components/SEO';
 
 export default function AdminLoginPage() {
   const [email, setEmail] = useState('');
@@ -13,7 +14,7 @@ export default function AdminLoginPage() {
   const { token, login } = useAuth();
 
   useEffect(() => {
-    document.title = 'Admin Login – SS Developers';
+    document.title = 'Admin Login – RRR Developers';
   }, []);
 
   const loginMutation = useMutation({
@@ -39,11 +40,12 @@ export default function AdminLoginPage() {
 
   return (
     <div className="admin-login-wrapper">
+      <SEO title="Admin Login – RRR Developers" noindex={true} />
       <div className="admin-login-card">
         <div className="admin-login-header">
-          <div className="admin-login-logo">SS</div>
+          <div className="admin-login-logo">RRR</div>
           <h2>Admin Portal</h2>
-          <p>Sign in to manage SS Developers</p>
+          <p>Sign in to manage RRR Developers</p>
         </div>
 
         {error && <div className="admin-login-error">{error}</div>}
@@ -56,7 +58,7 @@ export default function AdminLoginPage() {
               <input
                 type="email"
                 className="form-input"
-                placeholder="admin@ssdevelopers.com"
+                placeholder="admin@rrrdevelopers.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required

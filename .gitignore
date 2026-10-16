@@ -7,3 +7,4 @@ node_modules/
 dist/
 build/
 backend/dev.db
+Screenshot*.png

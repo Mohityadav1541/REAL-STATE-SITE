@@ -1,13 +1,8 @@
-import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import SEO from '../../components/SEO';
 
 export default function InvestmentPage() {
-  useEffect(() => {
-    document.title = 'Investment Advantage';
-    window.scrollTo(0, 0);
-  }, []);
-
   const items = [
     { title: 'Buy Plots', desc: 'Secure premium, government-approved industrial land tailored to your exact manufacturing or warehousing needs with transparent pricing.' },
     { title: 'Custom Built', desc: 'Partner with our construction experts to develop a built-to-suit facility on your newly acquired plot, optimized for your operations.' },
@@ -15,17 +10,31 @@ export default function InvestmentPage() {
   ];
 
   const cards = [
-    { title: 'Legal & Compliance', img: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=2070', desc: 'Navigate complex industrial regulations with ease.' },
-    { title: 'Infrastructure Setup', img: 'https://images.unsplash.com/photo-1541888086925-0c1bb678b668?q=80&w=2070', desc: 'Power, water, and connectivity solutions.' },
-    { title: 'Construction & Development', img: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2071', desc: 'End-to-end building and architecture support.' },
+    { title: 'Legal & Compliance', img: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=2070', alt: 'Legal compliance and clear industrial land titles in Gujarat', desc: 'Navigate complex industrial regulations with ease.' },
+    { title: 'Infrastructure Setup', img: 'https://images.unsplash.com/photo-1541888086925-0c1bb678b668?q=80&w=2070', alt: 'Plug-and-play industrial infrastructure in Gujarat', desc: 'Power, water, and connectivity solutions.' },
+    { title: 'Construction & Development', img: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2071', alt: 'Industrial warehouse and factory shed construction', desc: 'End-to-end building and architecture support.' },
   ];
 
   return (
     <>
+      <SEO
+        title="Industrial Land Investment in Gujarat | RRR Developers"
+        description="Strategic industrial land investment opportunities in Gujarat. High-growth industrial corridors, reliable infrastructure, and end-to-end development support with RRR Developers."
+        canonical="/investment"
+        keywords={[
+          'Industrial land investment Gujarat',
+          'Industrial plots Surat investment',
+          'Commercial industrial land Gujarat',
+          'RRR Developers investment',
+        ]}
+        breadcrumbs={[{ name: 'Investment', path: '/investment' }]}
+      />
+
       <div className="page-header" style={{ textAlign: 'center', padding: '140px 0 60px', background: 'var(--color-bg)', borderBottom: '1px solid var(--color-border)' }}>
         <div className="container">
-          <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2.5rem, 5vw, 4rem)', color: 'var(--color-text-primary)', fontWeight: 500, letterSpacing: '-0.02em' }}>
-            Investment Advantage
+          <span className="section-label">Strategic Growth</span>
+          <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2.5rem, 5vw, 4rem)', color: 'var(--color-text-primary)', fontWeight: 500, letterSpacing: '-0.02em', marginTop: '0.5rem' }}>
+            Industrial Land Investment in Gujarat
           </h1>
         </div>
       </div>
@@ -36,7 +45,7 @@ export default function InvestmentPage() {
             <div>
               <p style={{ fontSize: '14px', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'rgba(255,255,255,0.5)', marginBottom: '24px' }}>Services</p>
               <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(3rem, 5vw, 5rem)', fontWeight: 500, lineHeight: 1.1, letterSpacing: '-0.02em' }}>
-                How SS DEV<br />Can Help You
+                How RRR DEV<br />Can Help You
               </h2>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -94,7 +103,13 @@ export default function InvestmentPage() {
                 style={{ position: 'relative', borderRadius: '24px', overflow: 'hidden', height: '400px', cursor: 'pointer' }}
                 className="support-card"
               >
-                <img src={card.img} alt={card.title} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }} className="support-img" />
+                <img
+                  src={card.img}
+                  alt={card.alt || card.title}
+                  loading="lazy"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }}
+                  className="support-img"
+                />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '32px' }}>
                   <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.5rem', fontWeight: 500, color: '#fff', marginBottom: '8px' }}>
                     {card.title}

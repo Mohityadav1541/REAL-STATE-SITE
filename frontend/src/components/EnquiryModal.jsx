@@ -56,7 +56,7 @@ export default function EnquiryModal({ isOpen, onClose, project, plot, source = 
 
   const whatsappUrl = plot
     ? getPlotWhatsApp(plot.plotNumber, project?.name)
-    : getProjectWhatsApp(project?.name || 'SS Developers');
+    : getProjectWhatsApp(project?.name || 'RRR Developers');
 
   return (
     <div className="modal-overlay" onClick={handleClose}>
@@ -66,7 +66,7 @@ export default function EnquiryModal({ isOpen, onClose, project, plot, source = 
             <div className="section-label" style={{ textAlign: 'left', marginBottom: 4 }}>
               {plot ? `Plot ${plot.plotNumber}` : project?.name || 'Enquiry'}
             </div>
-            <h3 className="modal-title">Connect with SS Developers</h3>
+            <h3 className="modal-title">Connect with RRR Developers</h3>
           </div>
           <button className="btn btn-icon btn-outline" onClick={handleClose} style={{ border: 'none' }}>
             <X size={18} />
@@ -86,7 +86,7 @@ export default function EnquiryModal({ isOpen, onClose, project, plot, source = 
                 Thank You!
               </h3>
               <p style={{ color: 'var(--color-text-secondary)', marginBottom: 'var(--space-6)' }}>
-                Our SS Developers team will contact you shortly.
+                Our RRR Developers team will contact you shortly.
               </p>
               <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="btn btn-whatsapp">
                 <MessageCircle size={16} />

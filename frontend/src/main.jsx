@@ -5,6 +5,10 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from 'react-hot-toast';
 import App from './App.jsx';
 import './index.css';
+import { initAnalytics } from './utils/analytics';
+
+// Initialize privacy-friendly conversion & pageview tracking if configured
+initAnalytics();
 
 const queryClient = new QueryClient({
   defaultOptions: {

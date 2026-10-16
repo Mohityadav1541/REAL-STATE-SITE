@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Navigate, Outlet, Link, useLocation } from 'react-router-dom';
 import { LayoutDashboard, Building2, Map, Users, Calendar, QrCode, LogOut, Menu } from 'lucide-react';
 import { useAuth } from '../utils/helpers';
+import SEO from '../components/SEO';
 
 const NAV_ITEMS = [
   { path: '/admin', label: 'Dashboard', icon: LayoutDashboard, exact: true },
@@ -28,7 +29,7 @@ export default function AdminLayout() {
   const renderSidebar = () => (
     <div className="admin-sidebar">
       <div className="admin-sidebar-header">
-        <div className="admin-logo">SS Admin</div>
+        <div className="admin-logo">RRR Admin</div>
       </div>
       <nav className="admin-nav">
         {NAV_ITEMS.map((item) => {
@@ -60,6 +61,7 @@ export default function AdminLayout() {
 
   return (
     <div className="admin-layout">
+      <SEO title="Admin Console | RRR Developers" noindex={true} />
       {/* Desktop Sidebar */}
       <aside className="admin-desktop-sidebar">
         {renderSidebar()}

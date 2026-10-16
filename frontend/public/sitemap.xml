@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://real-state-site-ashen.vercel.app/</loc>
+    <lastmod>2026-10-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Projects Listing -->
+  <url>
+    <loc>https://real-state-site-ashen.vercel.app/projects</loc>
+    <lastmod>2026-10-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Project 1: RRR Industrial Park 1, Maroli -->
+  <url>
+    <loc>https://real-state-site-ashen.vercel.app/projects/project1</loc>
+    <lastmod>2026-10-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Project 1 Plots -->
+  <url>
+    <loc>https://real-state-site-ashen.vercel.app/projects/project1/plots</loc>
+    <lastmod>2026-10-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Project 2: RRR Industrial Land 3, Hojwala -->
+  <url>
+    <loc>https://real-state-site-ashen.vercel.app/projects/project2</loc>
+    <lastmod>2026-10-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Project 2 Plots -->
+  <url>
+    <loc>https://real-state-site-ashen.vercel.app/projects/project2/plots</loc>
+    <lastmod>2026-10-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- About Us -->
+  <url>
+    <loc>https://real-state-site-ashen.vercel.app/about</loc>
+    <lastmod>2026-10-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Why RRR Developers -->
+  <url>
+    <loc>https://real-state-site-ashen.vercel.app/why-us</loc>
+    <lastmod>2026-10-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Investment Opportunities -->
+  <url>
+    <loc>https://real-state-site-ashen.vercel.app/investment</loc>
+    <lastmod>2026-10-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Site Visit Booking -->
+  <url>
+    <loc>https://real-state-site-ashen.vercel.app/site-visit</loc>
+    <lastmod>2026-10-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Contact Us -->
+  <url>
+    <loc>https://real-state-site-ashen.vercel.app/contact</loc>
+    <lastmod>2026-10-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+</urlset>

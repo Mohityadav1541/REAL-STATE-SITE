@@ -1,14 +1,10 @@
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { MapPin, CheckCircle, ArrowRight, ChevronRight } from 'lucide-react';
 import { publicApi } from '../../lib/api';
+import SEO from '../../components/SEO';
 
 export default function ProjectsPage() {
-  useEffect(() => {
-    document.title = 'Our Projects – SS Developers';
-  }, []);
-
   const { data, isLoading, error } = useQuery({
     queryKey: ['projects'],
     queryFn: () => publicApi.getProjects(),
@@ -18,6 +14,21 @@ export default function ProjectsPage() {
 
   return (
     <>
+      <SEO
+        title="Industrial Land Projects in Gujarat | RRR Developers"
+        description="Explore master-planned industrial parks and government-approved industrial plots in Gujarat. Prime corridors in Maroli and Hojwala near the Palsana-Hazira industrial belt."
+        canonical="/projects"
+        keywords={[
+          'Industrial land projects in Gujarat',
+          'Industrial plots in Surat',
+          'RRR Industrial Park 1',
+          'RRR Industrial Land 3',
+          'Industrial land in Maroli',
+          'Industrial plots in Hojwala',
+        ]}
+        breadcrumbs={[{ name: 'Projects', path: '/projects' }]}
+      />
+
       {/* Page Header */}
       <div className="page-header">
         <div className="container page-header-content">
@@ -102,7 +113,11 @@ function ProjectListCard({ project, reverse }) {
     <div className={`pl-card ${reverse ? 'pl-card-reverse' : ''}`}>
       <div className="pl-card-image">
         {heroImage ? (
-          <img src={heroImage.url} alt={project.name} loading="lazy" />
+          <img
+            src={heroImage.url}
+            alt={`${project.name} – Industrial land and plots in ${project.location}, Gujarat`}
+            loading="lazy"
+          />
         ) : (
           <div className="pl-card-placeholder">🏭</div>
         )}
