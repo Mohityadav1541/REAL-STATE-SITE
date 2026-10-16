@@ -39,7 +39,7 @@ export default function PlotAvailabilityPage() {
 
   const filteredPlots = allPlots.filter((p) => {
     const matchesStatus = filterStatus === 'ALL' || p.status === filterStatus;
-    const matchesSearch = search === '' || p.plotNumber.toLowerCase().includes(search.toLowerCase());
+    const matchesSearch = search === '' || String(p.plotNumber || '').toLowerCase().includes(search.toLowerCase());
     return matchesStatus && matchesSearch;
   });
 

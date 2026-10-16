@@ -36,13 +36,13 @@ export default function PlotDetailPage() {
     <div className="bg-bg" style={{ minHeight: '100vh', padding: '120px 0 60px' }}>
       <SEO
         title={`Plot ${plot.plotNumber} – ${project.name} | RRR Developers`}
-        description={`Plot ${plot.plotNumber} at ${project.name}, ${project.location}, Gujarat. Area: ${plot.area} sqft, Road Width: ${plot.roadWidth}, Facing: ${plot.facing}, Status: ${plot.status}.`}
+        description={`Plot ${plot.plotNumber} at ${project.name}, ${project.location}. Area: ${plot.area ? `${plot.area} sqft` : 'Customizable'}, Road Width: ${plot.roadWidth || 'Standard'}, Facing: ${plot.facing || 'Standard'}, Status: ${plot.status}.`}
         canonical={`/plots/${plot.id}`}
         keywords={[
           `Plot ${plot.plotNumber}`,
           `${project.name} plots`,
           `Industrial plots ${project.location}`,
-          'Gujarat industrial plots',
+          'Industrial plots for sale',
         ]}
         breadcrumbs={[
           { name: 'Projects', path: '/projects' },

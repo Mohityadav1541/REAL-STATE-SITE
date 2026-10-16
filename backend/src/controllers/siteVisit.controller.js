@@ -4,7 +4,7 @@ const plotEmitter = require('../utils/events');
 // ─── Public: Submit Site Visit Request ───────────────────────
 const submitSiteVisit = async (req, res) => {
   try {
-    const { name, mobile, email, projectId, plotId, preferredDate, preferredTime, message } = req.body;
+    const { name, mobile, email, projectId, plotId, preferredDate, preferredTime, date, time, message } = req.body;
 
     if (!name || !mobile) {
       return res.status(400).json({ error: 'Name and mobile number are required' });
@@ -14,6 +14,9 @@ const submitSiteVisit = async (req, res) => {
     if (cleanMobile.length < 10) {
       return res.status(400).json({ error: 'Please provide a valid mobile number' });
     }
+
+    const finalDate = preferredDate || date || null;
+    const finalTime = preferredTime || time || null;
 
     // Find or create customer
     let customer = await prisma.customer.findFirst({ where: { mobile: cleanMobile } });
@@ -32,8 +35,8 @@ const submitSiteVisit = async (req, res) => {
         customerId: customer.id,
         projectId: projectId || null,
         plotId: plotId || null,
-        preferredDate: preferredDate || null,
-        preferredTime: preferredTime || null,
+        preferredDate: finalDate,
+        preferredTime: finalTime,
         message: message ? message.trim() : null,
         status: 'REQUESTED',
       },

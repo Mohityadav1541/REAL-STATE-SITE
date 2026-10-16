@@ -66,9 +66,11 @@ export default function SiteVisitPage() {
       return;
     }
     setErrors({});
-    // Set status to PENDING implicitly in backend, or explicit here if needed.
-    // The backend uses PENDING by default in prisma schema.
-    mutation.mutate(form);
+    mutation.mutate({
+      ...form,
+      preferredDate: form.date,
+      preferredTime: form.time,
+    });
   };
 
   // Get min date (tomorrow)

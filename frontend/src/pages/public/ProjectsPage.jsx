@@ -15,16 +15,17 @@ export default function ProjectsPage() {
   return (
     <>
       <SEO
-        title="Industrial Land Projects in Gujarat | RRR Developers"
-        description="Explore master-planned industrial parks and government-approved industrial plots in Gujarat. Prime corridors in Maroli and Hojwala near the Palsana-Hazira industrial belt."
+        title="Industrial Land Projects | RRR Developers"
+        description="Explore master-planned industrial parks and government-approved industrial plots. Prime industrial corridors with excellent highway and freight connectivity."
         canonical="/projects"
         keywords={[
-          'Industrial land projects in Gujarat',
-          'Industrial plots in Surat',
-          'RRR Industrial Park 1',
-          'RRR Industrial Land 3',
-          'Industrial land in Maroli',
-          'Industrial plots in Hojwala',
+          'Industrial land projects',
+          'Industrial plots for sale',
+          'Project 1',
+          'Project 2',
+          'Industrial land on Tonk Road',
+          'Industrial plots in Jaipur',
+          'RRR Developers industrial projects',
         ]}
         breadcrumbs={[{ name: 'Projects', path: '/projects' }]}
       />
@@ -35,7 +36,7 @@ export default function ProjectsPage() {
           <span className="section-label">Our Portfolio</span>
           <h1 className="page-header-title">Industrial Land Projects</h1>
           <p className="page-header-sub">
-            Government-approved industrial developments across strategic locations in Surat district.
+            Government-approved industrial developments across strategic industrial corridors.
           </p>
         </div>
       </div>

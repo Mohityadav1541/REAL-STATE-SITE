@@ -550,15 +550,16 @@ export default function HomePage() {
   return (
     <div style={{ backgroundColor: 'var(--color-bg)' }}>
       <SEO
-        title="RRR Developers | Industrial Land and Plots in Gujarat"
-        description="RRR Developers offers government-approved industrial land and plots in Gujarat with wide heavy-vehicle roads, robust utility infrastructure, and highway connectivity."
+        title="RRR Developers | Industrial Land and Plots"
+        description="RRR Developers offers government-approved industrial land and plots with wide heavy-vehicle roads, robust utility infrastructure, and strategic highway connectivity."
         canonical="/"
         keywords={[
-          'Industrial plots for sale in Surat',
-          'Industrial land in Maroli',
-          'Industrial plots in Hojwala',
-          'Industrial land in Gujarat',
-          'Industrial land near the Palsana-Hazira belt',
+          'Industrial plots for sale',
+          'Industrial land for manufacturing',
+          'Project 1 industrial plots',
+          'Project 2 industrial land',
+          'Industrial land on Tonk Road',
+          'Industrial plots in Jaipur',
           'Industrial plots with highway connectivity',
           'RRR Developers industrial projects',
         ]}
