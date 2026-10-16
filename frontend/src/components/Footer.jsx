@@ -58,10 +58,10 @@ export default function Footer() {
               <div className="footer-contact-item">
                 <MapPin size={15} />
                 <span>
-                  Office No. 827, 8th Floor,<br />
-                  Avadh Kontina, VIP Road,<br />
-                  Near Luthra Circle, Vesu,<br />
-                  Surat, Gujarat – 395007
+                  Chokhi Dhani Resort,<br />
+                  12 Miles, Tonk Road, Via Vatika,<br />
+                  Sitapura, Jaipur,<br />
+                  Rajasthan – 303905
                 </span>
               </div>
             </div>

@@ -66,7 +66,7 @@ export default function ProjectDetailPage() {
     <div className="project-detail">
       <SEO
         title={`${project.name}, ${project.location} | RRR Developers`}
-        description={`${project.name} offers government-approved industrial land and plots in ${project.location}, Gujarat. Features wide freight roads, utility lines, 24/7 security, and direct highway connectivity.`}
+        description={`${project.name} offers government-approved industrial land and plots in ${project.location}. Features wide freight roads, utility lines, 24/7 security, and direct highway connectivity.`}
         canonical={`/projects/${project.slug}`}
         ogImage={heroImage}
         keywords={[
@@ -296,7 +296,7 @@ export default function ProjectDetailPage() {
                 <div key={img.id} style={{ height: 250, borderRadius: 'var(--radius-lg)', overflow: 'hidden', background: '#f1f5f9' }}>
                   <img
                     src={img.url}
-                    alt={`${project.name} – Industrial facility view in ${project.location}, Gujarat`}
+                    alt={`${project.name} – Industrial facility view in ${project.location}`}
                     loading="lazy"
                     style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }}
                     className="hover-zoom"

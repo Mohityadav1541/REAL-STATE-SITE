@@ -17,16 +17,16 @@ export const COMPANY_INFO = {
   email: 'info@rrrdevelopers.com',
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'Office No. 827, 8th Floor, Avadh Kontina, VIP Road, Near Luthra Circle, Vesu',
-    addressLocality: 'Surat',
-    addressRegion: 'Gujarat',
-    postalCode: '395007',
+    streetAddress: 'Chokhi Dhani Resort, 12 Miles, Tonk Road, Via Vatika, Sitapura',
+    addressLocality: 'Jaipur',
+    addressRegion: 'Rajasthan',
+    postalCode: '303905',
     addressCountry: 'IN',
   },
   geo: {
     '@type': 'GeoCoordinates',
-    latitude: 21.1458,
-    longitude: 72.7758,
+    latitude: 26.766572,
+    longitude: 75.8370448,
   },
   openingHoursSpecification: [
     {
@@ -37,11 +37,9 @@ export const COMPANY_INFO = {
     },
   ],
   areaServed: [
+    'Jaipur',
+    'Rajasthan',
     'Surat',
-    'Maroli',
-    'Hojwala',
-    'Palsana',
-    'Hazira',
     'Gujarat',
     'India',
   ],
@@ -168,7 +166,7 @@ export function getProjectSchema(project) {
       '@type': 'PostalAddress',
       streetAddress: project.address || project.location,
       addressLocality: project.location,
-      addressRegion: 'Gujarat',
+      addressRegion: 'Rajasthan',
       addressCountry: 'IN',
     },
     geo: {
@@ -178,7 +176,7 @@ export function getProjectSchema(project) {
     },
     containedInPlace: {
       '@type': 'AdministrativeArea',
-      name: 'Surat District, Gujarat',
+      name: 'Jaipur, Rajasthan',
     },
   };
 }

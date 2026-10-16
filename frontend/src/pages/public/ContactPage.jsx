@@ -115,10 +115,10 @@ export default function ContactPage() {
                 <div>
                   <div className="contact-label">Corporate Office</div>
                   <div className="contact-value" style={{ lineHeight: 1.6 }}>
-                    Office No. 827, 8th Floor,<br />
-                    Avadh Kontina, VIP Road,<br />
-                    Near Luthra Circle, Vesu,<br />
-                    Surat, Gujarat – 395007
+                    Chokhi Dhani Resort,<br />
+                    12 Miles, Tonk Road, Via Vatika,<br />
+                    Sitapura, Jaipur,<br />
+                    Rajasthan – 303905
                   </div>
                 </div>
               </div>

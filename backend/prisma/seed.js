@@ -33,17 +33,20 @@ async function main() {
   const project1 = await prisma.project.upsert({
     where: { slug: 'project1' },
     update: {
+      location: 'Tonk Road, Jaipur',
+      address: 'Chokhi Dhani Resort Area, 12 Miles, Tonk Road, Jaipur, Rajasthan – 303905',
+      tagline: 'Prime Industrial Land on Tonk Road, Jaipur',
       lat: 26.766572,
       lng: 75.8370448,
     },
     create: {
       name: 'Project 1',
       slug: 'project1',
-      tagline: 'Prime Industrial Land on Ubhrat Road',
+      tagline: 'Prime Industrial Land on Tonk Road, Jaipur',
       description:
-        'Project 1 is strategically located on Ubhraṭ Road, Maroli, offering government-approved industrial plots with exceptional highway connectivity. Designed for modern manufacturing, warehousing and logistics operations, this park provides all essential infrastructure including wide heavy-vehicle roads, underground utility lines, and 24/7 gated security. This premium master-planned industrial park provides a comprehensive ecosystem for businesses to scale. Featuring a dedicated commercial zone, robust power supply substations, advanced water treatment facilities, and wide 60-feet internal concrete roads. Project 1 is the ideal choice for heavy engineering, textile manufacturing, and large-scale warehousing. Companies benefit from streamlined logistics, ample parking for heavy trailers, and proximity to major rail and sea freight terminals. Secure your future in an industrial hub that\'s built for tomorrow.',
-      location: 'Ubhraṭ Road, Maroli',
-      address: 'Ubhraṭ Road, Maroli, Surat District, Gujarat',
+        'Project 1 is strategically located near Chokhi Dhani, Tonk Road, Jaipur, offering government-approved industrial plots with exceptional highway connectivity. Designed for modern manufacturing, warehousing and logistics operations, this park provides all essential infrastructure including wide heavy-vehicle roads, underground utility lines, and 24/7 gated security. This premium master-planned industrial park provides a comprehensive ecosystem for businesses to scale. Featuring a dedicated commercial zone, robust power supply substations, advanced water treatment facilities, and wide 60-feet internal concrete roads. Project 1 is the ideal choice for heavy engineering, textile manufacturing, and large-scale warehousing. Companies benefit from streamlined logistics, ample parking for heavy trailers, and proximity to major rail and freight terminals. Secure your future in an industrial hub that\'s built for tomorrow.',
+      location: 'Tonk Road, Jaipur',
+      address: 'Chokhi Dhani Resort Area, 12 Miles, Tonk Road, Jaipur, Rajasthan – 303905',
       lat: 26.766572,
       lng: 75.8370448,
       highlights: JSON.stringify([
@@ -93,17 +96,20 @@ async function main() {
   const project2 = await prisma.project.upsert({
     where: { slug: 'project2' },
     update: {
+      location: 'Chokhi Dhani, Jaipur',
+      address: 'Chokhi Dhani Vicinity, 12 Miles, Tonk Road, Jaipur, Rajasthan – 303905',
+      tagline: 'Industrial Corridor Land at Tonk Road, Jaipur',
       lat: 26.766572,
       lng: 75.8370448,
     },
     create: {
       name: 'Project 2',
       slug: 'project2',
-      tagline: 'Industrial Corridor Land at Hojwala',
+      tagline: 'Industrial Corridor Land at Tonk Road, Jaipur',
       description:
-        'Project 2 at Hojwala is a government-approved industrial development positioned within 1 km of the Palsana-Hazira industrial belt. The property offers excellent freight road connectivity, secured campus infrastructure, and easy access to the expanding industrial corridor making it an ideal choice for manufacturers and logistics operators. Spread across a sprawling landscape, this industrial corridor project is engineered for high-capacity logistics and advanced manufacturing. It offers state-of-the-art infrastructure including uninterrupted industrial-grade power, high-speed fiber connectivity, and dedicated effluent treatment plants. The strategic positioning near the Palsana-Hazira belt ensures seamless supply chain operations and quick access to raw materials and markets. Designed with multiple large-scale buildings and built-to-suit shed options, this park provides maximum flexibility for growing enterprises to customize their operations perfectly.',
-      location: 'Hojwala',
-      address: 'Hojwala, Surat District, Gujarat',
+        'Project 2 near Chokhi Dhani, Jaipur is a government-approved industrial development positioned along the strategic Tonk Road industrial corridor. The property offers excellent freight road connectivity, secured campus infrastructure, and easy highway access making it an ideal choice for manufacturers and logistics operators. Spread across a sprawling landscape, this industrial corridor project is engineered for high-capacity logistics and advanced manufacturing. It offers state-of-the-art infrastructure including uninterrupted industrial-grade power, high-speed fiber connectivity, and dedicated effluent treatment plants. The strategic positioning ensures seamless supply chain operations and quick access to raw materials and markets. Designed with multiple large-scale buildings and built-to-suit shed options, this park provides maximum flexibility for growing enterprises to customize their operations perfectly.',
+      location: 'Chokhi Dhani, Jaipur',
+      address: 'Chokhi Dhani Vicinity, 12 Miles, Tonk Road, Jaipur, Rajasthan – 303905',
       lat: 26.766572,
       lng: 75.8370448,
       highlights: JSON.stringify([
